@@ -55,7 +55,6 @@
     //取消定时器
     [_timer invalidate];
     _timer = nil;
-    
 }
 
 - (void)viewDidLoad {
@@ -65,104 +64,6 @@
     _selectedElementIndex = arc4random()%2;
     
     [self setUpBasicViews];
-}
-
-- (void)setUpBasicViews {
-    [self setUpButtons];
-    
-    [self setUpChartView];
-    [self setUpChartModel];
-    [self.chartView aa_drawChartWithChartModel:self.chartModel];
-}
-
-- (void)setUpButtons {
-    for (int i = 0; i<4; i++) {
-        NSArray *titleNameArr = @[
-                                  @"Click to update whole chart data",
-                                  @"Click to hide whole data content",
-                                  @"Show one element of data array",
-                                  @"Hide one element of data array"];
-        
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.center = CGPointMake(self.view.center.x, self.view.frame.size.height-40*i-30);
-        btn.bounds = CGRectMake(0, 0, self.view.frame.size.width-40, 30);
-        [btn setTitle:titleNameArr[i] forState:UIControlStateNormal];
-        btn.backgroundColor = AAGrayColor;
-        [btn setTitleColor:AABlueColor forState:UIControlStateNormal];
-        btn.layer.cornerRadius = 3;
-        btn.layer.masksToBounds = YES;
-        btn.titleLabel.font = [UIFont systemFontOfSize:13.f];
-        btn.tag = i;
-        [btn addTarget:self action:@selector(oneOfTwoButtonsClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btn];
-    }
-}
-
-- (void)setUpChartView {
-    self.chartView = [[AAChartView alloc]initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, self.view.frame.size.height-250)];
-    self.chartView.delegate = self;
-    self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.chartView];
-}
-
-
-- (void)setUpChartModel {
-    self.chartModel= AAChartModel.new
-    .chartTypeSet([self configureTheChartType])//图表类型随机
-    .xAxisVisibleSet(true)
-    .yAxisVisibleSet(false)
-    .titleSet(@"")
-    .subtitleSet(@"")
-    .yAxisTitleSet(@"摄氏度")
-    .colorsThemeSet(@[@"#1e90ff",@"#dc143c"]);
-    
-    if (self.chartType == OnlyRefreshChartDataVCChartTypeStepArea
-        || self.chartType == OnlyRefreshChartDataVCChartTypeStepLine) {
-        
-        self.chartModel
-        .easyGradientColorsSet(true)
-        .markerRadiusSet(@0)
-        .seriesSet(@[
-                     AASeriesElement.new
-                     .nameSet(@"2017")
-                     .dataSet(@[@7.0, @6.9, @9.5, @14.5, @18.2, @21.5, @25.2, @26.5, @23.3, @18.3, @13.9, @9.6])
-                     .colorSet((id)[AAGradientColor sanguineColor])
-                     .stepSet((id)@true)
-                     ,
-                     AASeriesElement.new
-                     .nameSet(@"2018")
-                     .dataSet(@[@0.2, @0.8, @5.7, @11.3, @17.0, @22.0, @24.8, @24.1, @20.1, @14.1, @8.6, @2.5])
-                     .colorSet((id)[AAGradientColor deepSeaColor])
-                     .stepSet((id)@true)
-                     ,
-                     ]
-                   );
-    } else {
-        NSMutableArray *sinNumArr = [[NSMutableArray alloc]init];
-        NSMutableArray *sinNumArr2 = [[NSMutableArray alloc]init];
-        CGFloat y1 = 0.f;
-        CGFloat y2 = 0.f;
-        //第一个波纹的公式
-        for (float x = 0.f; x <= 50 ; x++) {
-            y1 = sin((10) * (x * M_PI / 180)) +x*2*0.01 ;
-            [sinNumArr addObject:@(y1)];
-            y2 =cos((10) * (x * M_PI / 180))+x*3*0.01;
-            [sinNumArr2 addObject:@(y2)];
-        }
-        self.chartModel.seriesSet(@[
-                                    AASeriesElement.new
-                                    .nameSet(@"2017")
-                                    .dataSet(sinNumArr)
-                                    .colorSet((id)[AAGradientColor ultramarineColor])
-                                    ,
-                                    AASeriesElement.new
-                                    .nameSet(@"2018")
-                                    .dataSet(sinNumArr2)
-                                    .colorSet((id)[AAGradientColor sanguineColor])
-                                    ,
-                                    ]
-                                  );
-    }
 }
 
 - (AAChartType)configureTheChartType {
@@ -179,29 +80,93 @@
     }
 }
 
-
-
-- (void)oneOfTwoButtonsClicked:(UIButton *)sender {
-    //关闭定时器
-    [_timer setFireDate:[NSDate distantFuture]];
+- (void)setUpBasicViews {
+    [self setUpChartView];
+    [self setUpChartModel];
     
-    switch (sender.tag) {
-        case 0: [self virtualUpdateTheChartViewDataInRealTime];
-            break;
-        case 1: self.chartView.chartSeriesHidden = YES;
-            break;
-        case 2: [self.chartView aa_showTheSeriesElementContentWithSeriesElementIndex:_selectedElementIndex];
-            break;
-        case 3: [self.chartView aa_hideTheSeriesElementContentWithSeriesElementIndex:_selectedElementIndex];
-            break;
-        default:
-            break;
+    AAOptions *aaOptions = [AAOptionsConstructor configureChartOptionsWithAAChartModel:self.chartModel];
+    if (self.chartModel.chartType == AAChartTypeColumn) {
+        aaOptions.plotOptions.column.groupPadding = @0;
+    } else if (self.chartModel.chartType == AAChartTypeBar) {
+        aaOptions.plotOptions.bar.groupPadding = @0;
     }
     
+    [self.chartView aa_drawChartWithOptions:aaOptions];
+    
+    [self virtualUpdateTheChartViewDataInRealTime];
+}
+
+
+- (void)setUpChartView {
+    CGRect frame = CGRectMake(0,
+                              60,
+                              self.view.frame.size.width,
+                              self.view.frame.size.height - 60);
+    self.chartView = [[AAChartView alloc]initWithFrame:frame];
+    self.chartView.delegate = self;
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.chartView];
+}
+
+
+- (void)setUpChartModel {
+    AAChartModel *aaChartModel = [self configureChartModelBasicContent];
+    NSArray *seriesArr = [self configureChartSeriesArray];
+    aaChartModel.series = seriesArr;
+    self.chartModel = aaChartModel;
+}
+
+- (AAChartModel *) configureChartModelBasicContent {
+    NSDictionary *gradientColorDic1 =
+    [AAGradientColor gradientColorWithDirection:AALinearGradientDirectionToBottom
+                               startColorString:@"rgba(138,43,226,1)"
+                                 endColorString:@"rgba(30,144,255,1)"];
+    
+    NSDictionary *gradientColorDic2 =
+    [AAGradientColor gradientColorWithDirection:AALinearGradientDirectionToBottom
+                               startColorString:@"#00BFFF"
+                                 endColorString:@"#00FA9A"];
+    
+     return  AAChartModel.new
+    .chartTypeSet([self configureTheChartType])//图表类型随机
+    .xAxisVisibleSet(true)
+    .yAxisVisibleSet(false)
+    .titleSet(@"")
+    .subtitleSet(@"")
+    .yAxisTitleSet(@"摄氏度")
+    .stackingSet(AAChartStackingTypeNormal)
+    .colorsThemeSet(@[
+        gradientColorDic1,
+        gradientColorDic2,
+        AAGradientColor.sanguineColor,
+        AAGradientColor.wroughtIronColor
+    ])
+    ;
+}
+
+- (NSArray *)configureChartSeriesArray {
+    NSArray *seriesDataArr = [self configureSeries];
+    seriesDataArr = [self setupStepChartSeriesElementWithSeriesDataArr:seriesDataArr];
+    return seriesDataArr;
+}
+
+- (NSArray *)setupStepChartSeriesElementWithSeriesDataArr:(NSArray *)seriesDataArr {
+    if (self.chartType == OnlyRefreshChartDataVCChartTypeStepArea
+        || self.chartType == OnlyRefreshChartDataVCChartTypeStepLine) {
+        [seriesDataArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            AASeriesElement *element = obj;
+            element.step = @true;
+        }];
+    }
+    return seriesDataArr;
 }
 
 - (void)virtualUpdateTheChartViewDataInRealTime {
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerStartWork) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                              target:self
+                                            selector:@selector(timerStartWork)
+                                            userInfo:nil
+                                             repeats:YES];
      [_timer fire];
 }
 
@@ -209,8 +174,7 @@
     [self onlyRefreshTheChartData];
 }
 
-- (void)onlyRefreshTheChartData {
-
+- (NSArray *)configureSeries {
     NSMutableArray *sinNumArr = [[NSMutableArray alloc]init];
     NSMutableArray *sinNumArr2 = [[NSMutableArray alloc]init];
     CGFloat y1 = 0.f;
@@ -230,15 +194,21 @@
     }
     
     NSArray *series = @[
-                        @{@"name":@"2017",
-                          @"type":@"bar",
-                          @"data":sinNumArr},
-                        @{@"name":@"2018",
-                          @"type":@"line",
-                          @"data":sinNumArr2},
-                        ];
-    
-    [self.chartView aa_onlyRefreshTheChartDataWithChartModelSeries:series];
+        AASeriesElement.new
+        .dataSet(sinNumArr),
+        AASeriesElement.new
+        .dataSet(sinNumArr2),
+        AASeriesElement.new
+        .dataSet(sinNumArr),
+        AASeriesElement.new
+        .dataSet(sinNumArr2),
+    ];
+    return series;
+}
+
+- (void)onlyRefreshTheChartData {
+    [self.chartView aa_onlyRefreshTheChartDataWithChartModelSeries:[self configureSeries]
+                                                         animation:true];
     NSLog(@"Updated the chart data content!!! ☺️☺️☺️");
 }
 

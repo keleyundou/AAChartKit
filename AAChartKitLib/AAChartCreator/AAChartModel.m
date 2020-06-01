@@ -50,10 +50,19 @@ AAChartType const AAChartTypeAreasplinerange = @"areasplinerange";
 AAChartType const AAChartTypeBoxplot         = @"boxplot";
 AAChartType const AAChartTypeWaterfall       = @"waterfall";
 AAChartType const AAChartTypePolygon         = @"polygon";
+AAChartType const AAChartTypeErrorbar        = @"errorbar";
+AAChartType const AAChartTypeGauge           = @"gauge";
 
-AAAlignType const AAAlignTypeLeft   = @"left";
-AAAlignType const AAAlignTypeCenter = @"center";
-AAAlignType const AAAlignTypeRight  = @"right";
+AAChartLayoutType const AAChartLayoutTypeHorizontal = @"horizontal";
+AAChartLayoutType const AAChartLayoutTypeVertical   = @"vertical";
+
+AAChartAlignType const AAChartAlignTypeLeft   = @"left";
+AAChartAlignType const AAChartAlignTypeCenter = @"center";
+AAChartAlignType const AAChartAlignTypeRight  = @"right";
+
+AAChartVerticalAlignType const AAChartVerticalAlignTypeTop    = @"top";
+AAChartVerticalAlignType const AAChartVerticalAlignTypeMiddle = @"middle";
+AAChartVerticalAlignType const AAChartVerticalAlignTypeBottom = @"bottom";
 
 AAChartZoomType const AAChartZoomTypeNone = @"none";
 AAChartZoomType const AAChartZoomTypeX    = @"x";
@@ -78,17 +87,17 @@ AAChartFontWeightType const AAChartFontWeightTypeThin     = @"thin";
 AAChartFontWeightType const AAChartFontWeightTypeRegular  = @"regular";
 AAChartFontWeightType const AAChartFontWeightTypeBold     = @"bold";
 
-AALineDashStyleType const AALineDashStyleTypeSolid           = @"Solid";
-AALineDashStyleType const AALineDashStyleTypeShortDash       = @"ShortDash";
-AALineDashStyleType const AALineDashStyleTypeShortDot        = @"ShortDot";
-AALineDashStyleType const AALineDashStyleTypeShortDashDot    = @"ShortDashDot";
-AALineDashStyleType const AALineDashStyleTypeShortDashDotDot = @"ShortDashDotDot";
-AALineDashStyleType const AALineDashStyleTypeDot             = @"Dot";
-AALineDashStyleType const AALineDashStyleTypeDash            = @"Dash";
-AALineDashStyleType const AALineDashStyleTypeLongDash        = @"LongDash";
-AALineDashStyleType const AALineDashStyleTypeDashDot         = @"DashDot";
-AALineDashStyleType const AALineDashStyleTypeLongDashDot     = @"LongDashDot";
-AALineDashStyleType const AALineDashStyleTypeLongDashDotDot  = @"LongDashDotDot";
+AAChartLineDashStyleType const AAChartLineDashStyleTypeSolid           = @"Solid";
+AAChartLineDashStyleType const AAChartLineDashStyleTypeShortDash       = @"ShortDash";
+AAChartLineDashStyleType const AAChartLineDashStyleTypeShortDot        = @"ShortDot";
+AAChartLineDashStyleType const AAChartLineDashStyleTypeShortDashDot    = @"ShortDashDot";
+AAChartLineDashStyleType const AAChartLineDashStyleTypeShortDashDotDot = @"ShortDashDotDot";
+AAChartLineDashStyleType const AAChartLineDashStyleTypeDot             = @"Dot";
+AAChartLineDashStyleType const AAChartLineDashStyleTypeDash            = @"Dash";
+AAChartLineDashStyleType const AAChartLineDashStyleTypeLongDash        = @"LongDash";
+AAChartLineDashStyleType const AAChartLineDashStyleTypeDashDot         = @"DashDot";
+AAChartLineDashStyleType const AAChartLineDashStyleTypeLongDashDot     = @"LongDashDot";
+AAChartLineDashStyleType const AAChartLineDashStyleTypeLongDashDotDot  = @"LongDashDotDot";
 
 @implementation AAChartModel
 
@@ -98,12 +107,11 @@ AALineDashStyleType const AALineDashStyleTypeLongDashDotDot  = @"LongDashDotDot"
         _chartType             = AAChartTypeColumn;//默认图表类型为柱状图
         _animationType         = AAChartAnimationLinear;//默认使用非easing.js中的'linear'线性渐变效果
         _animationDuration     = @800;//默认动画时长为800毫秒
-        _subtitleAlign         = AAAlignTypeLeft;//默认图表副标题居左显示
+        _subtitleAlign         = AAChartAlignTypeLeft;//默认图表副标题居左显示
         _stacking              = AAChartStackingTypeFalse;//默认不开启图表数据的堆积效果
         _zoomType              = AAChartZoomTypeNone ;//默认禁用图表的手势缩放功能
         _colorsTheme           = @[@"#1e90ff",@"#ef476f",@"#ffd066",@"#04d69f",@"#25547c",];//默认颜色主题
         _tooltipEnabled        = YES;//默认启用浮动提示框
-        //        _tooltipCrosshairs     = YES;//默认启用准星线
         _tooltipShared         = YES;//默认多组数据共享一个浮动提示框
         _xAxisLabelsEnabled    = YES;//默认显示 X轴坐标点文字
         _xAxisGridLineWidth    = @0; //设置x轴分割线宽度为0个像素,即是隐藏 X轴分割线
@@ -121,13 +129,13 @@ AALineDashStyleType const AALineDashStyleTypeLongDashDotDot  = @"LongDashDotDot"
         
         _titleFontColor        = @"#000000";//标题字体颜色为黑色
         _titleFontWeight       = AAChartFontWeightTypeRegular;//常规字体
-        _titleFontSize         = @11;
+        _titleFontSize         = @14;
         _subtitleFontColor     = @"#000000";//副标题字体颜色为黑色
         _subtitleFontWeight    = AAChartFontWeightTypeRegular;//常规字体
         _subtitleFontSize      = @9;
-        _dataLabelFontColor    = @"#000000";//数据标签默认颜色为黑色
-        _dataLabelFontWeight   = AAChartFontWeightTypeBold;//图表的数据字体为粗体
-        _dataLabelFontSize     = @10;
+        _dataLabelsFontColor   = @"#000000";//数据标签默认颜色为黑色
+        _dataLabelsFontWeight  = AAChartFontWeightTypeBold;//图表的数据字体为粗体
+        _dataLabelsFontSize    = @10;
         _xAxisLabelsFontSize   = @11;//x轴字体大小
         _xAxisLabelsFontColor  = @"#778899";//浅石板灰色字体
         _xAxisLabelsFontWeight = AAChartFontWeightTypeThin;//细体字
@@ -153,7 +161,7 @@ AAPropSetFuncImplementation(AAChartModel, NSArray     <NSString *>*, colorsTheme
 AAPropSetFuncImplementation(AAChartModel, NSArray     <NSString *>*, categories) //x轴坐标每个点对应的名称(注意:这个不是用来设置 X 轴的值,仅仅是用于设置 X 轴文字内容的而已)
 AAPropSetFuncImplementation(AAChartModel, NSArray  *, series) //图表的数据列内容
 
-AAPropSetFuncImplementation(AAChartModel, AAAlignType, subtitleAlign) //图表副标题文本水平对齐方式。可选的值有 “left”，”center“和“right”。 默认是：center.
+AAPropSetFuncImplementation(AAChartModel, AAChartAlignType, subtitleAlign) //图表副标题文本水平对齐方式。可选的值有 “left”，”center“和“right”。 默认是：center.
 AAPropSetFuncImplementation(AAChartModel, AAChartType,              chartType) //图表类型
 AAPropSetFuncImplementation(AAChartModel, AAChartStackingType,      stacking) //堆积样式
 AAPropSetFuncImplementation(AAChartModel, AAChartSymbolType,        markerSymbol) //折线曲线连接点的类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
@@ -166,10 +174,10 @@ AAPropSetFuncImplementation(AAChartModel, BOOL,       inverted) //x 轴是否垂
 AAPropSetFuncImplementation(AAChartModel, BOOL,       easyGradientColors) //是否方便快捷地将常规主题颜色数组 colorsTheme 自动转换为半透明渐变效果的颜色数组(设置后就不用自己再手动去写渐变色字典,相当于是设置渐变色的一个快捷方式,当然了,如果需要细致地自定义渐变色效果,还是需要自己手动配置渐变颜色字典内容,具体方法参见图表示例中的`颜色渐变条形图`示例代码),默认为否
 AAPropSetFuncImplementation(AAChartModel, BOOL,       polar) //是否极化图形(变为雷达图),默认为否
 
-AAPropSetFuncImplementation(AAChartModel, BOOL,       dataLabelEnabled) //是否显示数据,默认为否
-AAPropSetFuncImplementation(AAChartModel, NSString *, dataLabelFontColor) //Datalabel font color
-AAPropSetFuncImplementation(AAChartModel, NSNumber *, dataLabelFontSize) //Datalabel font size
-AAPropSetFuncImplementation(AAChartModel, NSString *, dataLabelFontWeight) //Datalabel font weight
+AAPropSetFuncImplementation(AAChartModel, BOOL,       dataLabelsEnabled) //是否显示数据,默认为否
+AAPropSetFuncImplementation(AAChartModel, NSString *, dataLabelsFontColor) //Datalabel font color
+AAPropSetFuncImplementation(AAChartModel, NSNumber *, dataLabelsFontSize) //Datalabel font size
+AAPropSetFuncImplementation(AAChartModel, NSString *, dataLabelsFontWeight) //Datalabel font weight
 
 
 AAPropSetFuncImplementation(AAChartModel, BOOL,       xAxisVisible) //x 轴是否可见(默认可见)
@@ -185,7 +193,7 @@ AAPropSetFuncImplementation(AAChartModel, NSNumber *, xAxisTickInterval) //x轴�
 
 AAPropSetFuncImplementation(AAChartModel, NSNumber *, xAxisCrosshairWidth) 
 AAPropSetFuncImplementation(AAChartModel, NSString *, xAxisCrosshairColor) 
-AAPropSetFuncImplementation(AAChartModel, AALineDashStyleType,   xAxisCrosshairDashStyleType) 
+AAPropSetFuncImplementation(AAChartModel, AAChartLineDashStyleType,   xAxisCrosshairDashStyleType) 
 
 
 AAPropSetFuncImplementation(AAChartModel, BOOL,       yAxisVisible) //y 轴是否可见(默认可见)
@@ -207,7 +215,7 @@ AAPropSetFuncImplementation(AAChartModel, NSArray  *, yAxisTickPositions) //自�
 
 AAPropSetFuncImplementation(AAChartModel, NSNumber *, yAxisCrosshairWidth) 
 AAPropSetFuncImplementation(AAChartModel, NSString *, yAxisCrosshairColor) 
-AAPropSetFuncImplementation(AAChartModel, AALineDashStyleType,   yAxisCrosshairDashStyleType) 
+AAPropSetFuncImplementation(AAChartModel, AAChartLineDashStyleType,   yAxisCrosshairDashStyleType) 
 
 
 AAPropSetFuncImplementation(AAChartModel, BOOL,       tooltipEnabled) //是否显示浮动提示框(默认显示)
@@ -220,5 +228,6 @@ AAPropSetFuncImplementation(AAChartModel, NSNumber *, borderRadius) //柱状图�
 AAPropSetFuncImplementation(AAChartModel, NSNumber *, markerRadius) //折线连接点的半径长度
 AAPropSetFuncImplementation(AAChartModel, NSString *, zoomResetButtonText)  //String to display in 'zoom reset button"
 AAPropSetFuncImplementation(AAChartModel, BOOL      , touchEventEnabled)
+AAPropSetFuncImplementation(AAChartModel, AAScrollablePlotArea *, scrollablePlotArea)
 
 @end

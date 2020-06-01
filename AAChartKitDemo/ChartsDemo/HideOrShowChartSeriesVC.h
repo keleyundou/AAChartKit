@@ -1,15 +1,17 @@
 //
-//  CustomStyleChartVC.h
+//  ChartSeriesHideOrShowVC.h
 //  AAChartKitDemo
 //
-//  Created by AnAn on 2018/11/13.
+//  Created by AnAn on 2018/11/30.
 //  Copyright © 2018 Danny boy. All rights reserved.
-//*************** ...... SOURCE CODE ...... ***************
-//***...................................................***
-//*** https://github.com/AAChartModel/AAChartKit        ***
-//*** https://github.com/AAChartModel/AAChartKit-Swift  ***
-//***...................................................***
-//*************** ...... SOURCE CODE ...... ***************
+//*************** ............ SOURCE CODE ............ ***************
+//***.............................................................  ***
+//*** iOS     :https://github.com/AAChartModel/AAChartKit           ***
+//*** iOS     :https://github.com/AAChartModel/AAChartKit-Swift     ***
+//*** Android :https://github.com/AAChartModel/AAChartCore          ***
+//*** Android :https://github.com/AAChartModel/AAChartCore-Kotlin   ***
+//***...............................................................***
+//*************** ............ SOURCE CODE ............ ***************
 
 /*
  
@@ -31,15 +33,13 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "AAChartKit.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CustomStyleChartVC : UIViewController
-
-@property (nonatomic, assign) NSUInteger chartType;
-@property (nonatomic, assign) NSUInteger selectedIndex;
-@property (nonatomic, strong) NSArray *navigationItemTitleArr;
-
+@interface HideOrShowChartSeriesVC : UIViewController
+@property (nonatomic, assign) NSInteger chartTypeIndex;
 @end
 
 NS_ASSUME_NONNULL_END

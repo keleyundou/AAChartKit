@@ -32,7 +32,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class AAMarker,AADataLabels;
+@class AAMarker,AADataLabels,AATooltip,AAStates,AAShadow;
 
 @interface AASeriesElement : NSObject
 
@@ -59,15 +59,15 @@ AAPropStatementAndPropSetFuncStatement(strong, AASeriesElement, NSArray  *, keys
 AAPropStatementAndPropSetFuncStatement(strong, AASeriesElement, NSNumber *, yAxis) 
 AAPropStatementAndPropSetFuncStatement(strong, AASeriesElement, AADataLabels*, dataLabels) 
 AAPropStatementAndPropSetFuncStatement(strong, AASeriesElement, id        , step) //是否转变为直方折线图
-AAPropStatementAndPropSetFuncStatement(strong, AASeriesElement, NSDictionary *, states) 
+AAPropStatementAndPropSetFuncStatement(strong, AASeriesElement, AAStates *, states)
 AAPropStatementAndPropSetFuncStatement(assign, AASeriesElement, BOOL      , showInLegend) //Whether to display this particular series or series type in the legend. The default value is true for standalone series, false for linked series. 默认是：true.
 AAPropStatementAndPropSetFuncStatement(assign, AASeriesElement, BOOL      , visible) //数据列是否显示的状态,可以通过 series.show()、series.hide()、series.setVisible 来改变这个属性
 AAPropStatementAndPropSetFuncStatement(strong, AASeriesElement, NSArray  *, zones)
 AAPropStatementAndPropSetFuncStatement(copy,   AASeriesElement, NSString *, zoneAxis)
-AAPropStatementAndPropSetFuncStatement(strong, AASeriesElement, id, shadow) //数据列的阴影效果。从 2.3 开始阴影可以配置成包含 color、offsetX、offsetY、opacity 和 width 属性的对象形式。 默认是：false
+AAPropStatementAndPropSetFuncStatement(strong, AASeriesElement, AAShadow *, shadow) //数据列的阴影效果。从 2.3 开始阴影可以配置成包含 color、offsetX、offsetY、opacity 和 width 属性的对象形式。 默认是：false
 AAPropStatementAndPropSetFuncStatement(copy,   AASeriesElement, NSString *, stack)
-
-
+AAPropStatementAndPropSetFuncStatement(strong, AASeriesElement, AATooltip*, tooltip)
+AAPropStatementAndPropSetFuncStatement(strong, AASeriesElement, NSNumber *, zIndex) //层叠，series element 在图表中显示的层叠级别，值越大，显示越向前
 
 @end
 
@@ -76,6 +76,7 @@ AAPropStatementAndPropSetFuncStatement(copy,   AASeriesElement, NSString *, stac
 
 AAPropStatementAndPropSetFuncStatement(copy  , AADataElement, NSString *, color)
 AAPropStatementAndPropSetFuncStatement(strong, AADataElement, AADataLabels *, dataLabels)
+AAPropStatementAndPropSetFuncStatement(strong, AADataElement, AAMarker *, marker)
 AAPropStatementAndPropSetFuncStatement(strong, AADataElement, NSNumber *, y)
 
 @end

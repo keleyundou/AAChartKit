@@ -1,6 +1,6 @@
 
 ![AAChartKit-LOGO](https://raw.githubusercontent.com/AAChartModel/loadHtmlCssJsDemo-master/master/AAChartKit/AAChartKit-Logo.png)
-# AAChartKit 3.0
+# AAChartKit 
 
 [![Support](https://img.shields.io/badge/support-iOS%206%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)</br>
 [![](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/AAChartModel/AAChartKit/blob/master/LICENSE)</br>
@@ -26,14 +26,25 @@
  
  ***
 
-* 🎂        环境友好,兼容性强. 适配 `iOS 6 +`,  支持`ARC`,支持 `Objective-C`语言,配置简单.同时更有 Swift 版本[AAInfographics](https://github.com/AAChartModel/AAChartKit-Swift)可供使用.
-* 🚀        功能强大,类型多样 -. 支持`柱状图` 、`条形图` 、`折线图` 、`曲线图` 、`折线填充图` 、`曲线填充图`、`雷达图`、`极地图`、`扇形图`、`气泡图`、`散点图`、`区域范围图`、`柱形范围图`、`面积范围图`、`面积范围均线图`、`直方折线图`、`直方折线填充图`、`箱线图`、`瀑布图`、`热力图`、`桑基图`、`金字塔图`、`漏斗图`、等二十几种类型的图形,不可谓之不多.
-* 🎮        交互式图形动画 . 有着清晰和充满细节的用户交互方式,与此同时,图形渲染`动画`效果细腻精致,流畅优美.有三十多种以上渲染动画效果可供选择,用户可自由设置渲染图形时的动画时间和动画类型,关于图形渲染动画类型,具体参见[ AAChartKit 动画类型](https://github.com/AAChartModel/AAChartKit/blob/master/CHINESE-README.md#当前已支持的图表渲染动画类型有三十种以上说明如下).
-* 👌        支持手势缩放 .支持图表的手势缩放和拖动阅览,手势缩放类型具体参见[ AAChartKit 手势缩放类型](https://github.com/AAChartModel/AAChartKit/blob/master/CHINESE-README.md#当前已支持的图表手势缩放类型共有三种说明如下),默认禁用手势缩放功能.
-* 🦋        极简主义 . `AAChartView + AAChartModel = Chart`,在 ***AAChartKit*** 图表框架当中,遵循这样一个极简主义公式:`图表视图控件 + 图表模型 = 你想要的图表`.同另一款强大而又精美的图表库[AAInfographics](https://github.com/AAChartModel/AAChartKit-Swift)完全一致.
-* ⛓        链式编程语法 . 支持类 *Masonry* `链式编程语法`,一行代码即可配置完成 `AAChartModel`模型对象实例.
-* 🎈        简洁清晰,轻便易用 . 最少仅仅需要 **五行代码** 即可完成整个图表的绘制工作(使用链式编程语法配置 `AAChartModel` 实例对象时,无论你写多少行代码,理论上只能算作是一行). 😜😜😜
-* 🖱        支持图表的[用户点击事件及单指滑动事件](https://github.com/AAChartModel/AAChartKit/blob/master/CHINESE-README.md#支持监听用户点击事件及单指滑动事件),可在此基础上实现双表联动乃至多表联动,以及其他更多更复杂的自定义用户交互效果.
+* 🎂        **环境友好,兼容性强**. 适配 `iOS 9 +`, 支持`iOS`、 `iPad OS`、`TV OS`、`macOS`,  支持 `Objective-C`语言, 同时更有 `Swift` 语言版本 [AAInfographics](https://github.com/AAChartModel/AAChartKit-Swift) 、 `Java` 语言版本 [AAChartCore](https://github.com/AAChartModel/AAChartCore) 、`Kotlin` 语言版本 [AAChartCore-Kotlin](https://github.com/AAChartModel/AAChartCore-Kotlin) 可供使用, 配置导入工程简单易操作. 支持的所有语言版本及连接,参见此[列表](#源代码).
+
+* 🚀        **功能强大,类型多样** -. 支持`柱状图` 、`条形图` 、`折线图` 、`曲线图` 、`折线填充图` 、`曲线填充图`、`雷达图`、`极地图`、`扇形图`、`气泡图`、`散点图`、`区域范围图`、`柱形范围图`、`面积范围图`、`面积范围均线图`、`直方折线图`、`直方折线填充图`、`箱线图`、`瀑布图`、`热力图`、`桑基图`、`金字塔图`、`漏斗图`、等二十几种类型的图形,不可谓之不多.
+
+* 📝       **现代化声明式语法**. 与过往的命令式编程技巧不同, 在 AAChartKit 中绘制任意一款自定义图表, 你完全无需关心挠人的内在实现细节. 描述你所要得到的, 你便得到你所描述的.
+
+* 🔬       **细致入微的用户自定义功能**. 基础的`主标题`、`副标题`、`X 轴`、`Y 轴`自不必谈, 从纵横的`交互准星线`、跟手的`浮动提示框`, 到切割数值的`值域分割线`、`值域分割颜色带`, 再到细小的`线条`类型,`标记点`样式,  各种细微的图形子组件, 应有尽有. 以至于不论是`极简`、抽象的小清新风格, 还是纷繁`复杂`的严肃商业派头, 均可完美驾驭.
+
+* 🎮        **交互式图形动画** . 有着清晰和充满细节的用户交互方式, 与此同时, 图形渲染`动画`效果细腻精致, 流畅优美. 有三十多种以上渲染动画效果可供选择, 用户可自由设置渲染图形时的动画时间和动画类型, 关于图形渲染动画类型,具体参见[ AAChartKit 动画类型](#当前已支持的图表渲染动画类型有三十种以上说明如下).
+
+* 🦋        **极简主义** . `AAChartView + AAChartModel = Chart`,在 ***AAChartKit*** 图表框架当中,遵循这样一个极简主义公式:`图表视图控件 + 图表模型 = 你想要的图表`. 同另一款强大而又精美的图表库[AAInfographics](https://github.com/AAChartModel/AAChartKit-Swift)完全一致.
+
+* ⛓        **链式编程语法** . 支持类 *Masonry* `链式编程语法`, 一行代码即可配置完成 `AAChartModel`模型对象实例.
+
+* 🎈        **简洁清晰,轻便易用** .  最少仅仅需要 **五行代码** 即可完成整个图表的绘制工作(使用链式编程语法配置 `AAChartModel` 实例对象时, 无论你写多少行代码, 理论上只能算作是一行). 🤪🤪🤪
+
+* 🖱        **交互事件回调**       支持图表的[用户点击事件及单指滑动事件](#支持监听用户点击事件及单指滑动事件), 可在此基础上实现双表联动乃至多表联动,以及其他更多更复杂的自定义用户交互效果.
+
+* 👌        **支持手势缩放** . 支持各个方向的图表手势缩放和拖动阅览, 手势缩放类型具体参见[ AAChartKit 手势缩放类型](#当前已支持的图表手势缩放类型共有三种说明如下), 默认禁用手势缩放功能.
 
 ***
 
@@ -96,7 +107,7 @@ _aaChartView.frame = CGRectMake(0, 60, chartViewWidth, chartViewHeight);
 3. 配置视图模型`AAChartModel`
 ```objective-c
 AAChartModel *aaChartModel= AAObject(AAChartModel)
-.chartTypeSet(AAChartTypeLine)//设置图表的类型(这里以设置的为折线图为例)
+.chartTypeSet(AAChartTypeArea)//设置图表的类型(这里以设置的为折线面积图为例)
 .titleSet(@"编程语言热度")//设置图表标题
 .subtitleSet(@"虚拟数据")//设置图表副标题
 .categoriesSet(@[@"Java",@"Swift",@"Python",@"Ruby", @"PHP",@"Go",@"C",@"C#",@"C++"])//图表横轴的内容
@@ -122,7 +133,7 @@ AAChartModel *aaChartModel= AAObject(AAChartModel)
 /*图表视图对象调用图表模型对象,绘制最终图形*/
 [_aaChartView aa_drawChartWithChartModel:aaChartModel];
 ```
-🌹🌹🌹 好了,至此,有关于绘制图形的任务,一切皆已经搞定!!! 你将得到你想要的任意图形!!!🌈🌈🌈
+🎉🎉🎉 好了,至此,有关于绘制图形的任务,一切皆已经搞定!!! 你将得到你想要的任意图形!!! 🌈🌈🌈
 
 ### 更新图形内容
 如果你需要更新图表内容,你应该阅读以下内容,根据你的实际需要,选择调用适合你的函数
@@ -239,8 +250,10 @@ AAChartModel *aaChartModel= AAObject(AAChartModel)
 
 ### 支持通过`JavaScript` 函数来自定义 `AATooltip`视图显示效果
 有时系统默认的 `tooltip` 浮动提示框的显示效果无法满足使用者的特殊自定义要求,此时可以通过添加 `AATooltip` 的 `headerFormat` 和 `pointFormat`字符串属性来自定义浮动提示框的显示内容,如仍旧不能满足需求,更可以通过 `AATooltip` 的 `formatter` 函数来实现视图的特殊定制化
-例如,如下配置 `AATooltip` 实例对象属性
-```objective-c
+例如
+
+* 如下配置 `AATooltip` 实例对象属性
+```js
     /*Custom Tooltip Style --- 自定义图表浮动提示框样式及内容*/
     AATooltip *tooltip = aaOptions.tooltip;
     tooltip
@@ -262,18 +275,48 @@ AAChartModel *aaChartModel= AAObject(AAChartModel)
               .fontSizeSet(@"12px"))
     ;
 ```
-即可完成图表的浮动提示框的特殊定制化.得到的浮动提示框的视觉效果图如下👇
+得到的浮动提示框的视觉效果图如下👇
 ![Custom Tooltip Style](https://user-images.githubusercontent.com/16357599/56589690-543c5880-6618-11e9-9d18-6bc0fe2fa53f.png)
+
+* 如下配置 `AATooltip` 实例对象属性
+```js
+    aaOptions.tooltip
+    .useHTMLSet(true)
+    .formatterSet(@AAJSFunc(function () {
+        let colorsArr = [];
+        colorsArr.push("mediumspringgreen");
+        colorsArr.push("deepskyblue");
+        colorsArr.push("red");
+        colorsArr.push("sandybrown");
+        let wholeContentString ='<span style=\"' + 'color:lightGray; font-size:13px\"' + '>◉ Time: ' + this.x + ' year</span><br/>';
+        for (let i = 0;i < 4;i++) {
+            let thisPoint = this.points[i];
+            let yValue = thisPoint.y;
+            if (yValue != 0) {
+                let spanStyleStartStr = '<span style=\"' + 'color:'+ colorsArr[i] + '; font-size:13px\"' + '>◉ ';
+                let spanStyleEndStr = '</span> <br/>';
+                wholeContentString += spanStyleStartStr + thisPoint.series.name + ': ' + thisPoint.y + '℃' + spanStyleEndStr;
+            }
+        }
+        return wholeContentString;
+    }))
+    .backgroundColorSet(@"#050505")
+    .borderColorSet(@"#050505")
+    ;
+```
+得到的浮动提示框的视觉效果图如下👇
+![colorfulTooltipChart](https://raw.githubusercontent.com/AAChartModel/Gallery/master/AAChartKit/colorfulTooltipChart.png)
 
 ### 支持添加值域分割功能
 
-* 添加颜色带🎀值域分割
+* 添加值域分割颜色带 `plotBands 🎀`
 ![plotBandsChart](https://raw.githubusercontent.com/AAChartModel/Gallery/master/AAChartKit/plotBandsChart.png)
 
-
-* 添加颜色线🧶值域分割
+* 添加值域分割颜色线 `plotLines 🧶`
 ![plotLinesChart](https://raw.githubusercontent.com/AAChartModel/Gallery/master/AAChartKit/plotLinesChart.png)
 
+* 添加值域分割数据列分区 `zones 🧱`
+![seriesZonesChart](https://raw.githubusercontent.com/AAChartModel/Gallery/master/AAChartKit/seriesZonesChart.png)
 
   
 ### 当前已支持的图表类型有十种以上,说明如下
@@ -485,10 +528,13 @@ AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, NSString *, zoomRes
  
  
  ## 源代码⛓
- 语言版本 |  项目名称 | 源代码链接|
- ------------ | ------------- | ------------- |
- Swift | AAInfographics | https://github.com/AAChartModel/AAChartKit-Swift |
- Objective C | AAChartKit | https://github.com/AAChartModel/AAChartKit |
+语言版本 |  项目名称 | 适用平台| 源代码链接|
+------------ | ------------- |------------- | ------------- |
+Swift | AAInfographics |  iOS |https://github.com/AAChartModel/AAChartKit-Swift |
+Objective C | AAChartKit | iOS | https://github.com/AAChartModel/AAChartKit |
+Kotlin | AAInfographics | Android | https://github.com/AAChartModel/AAChartCore-Kotlin |
+Java | AAChartCore | Android | https://github.com/AAChartModel/AAChartCore |
+
  
 
 ## 许可证
@@ -512,41 +558,14 @@ AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, NSString *, zoomRes
 * SegmentFault  : https://segmentfault.com/u/huanghunbieguan
 -------------------------------------------------------------------------------
 
-## 附言
 
-在 ***AAChartKit*** 封装库的初始设计中,为提升`.js`文件的加载速度,故将所依赖的`.js`文件放置在本地.然而由于本项目功能较多,故放置于本地的附加`JavaScript`文件库体积较大,整个`AAJSFiles`文件夹下所有的`.js`文件体积合计共有`250KB左右`(当然,在项目打包为压缩后的`.ipa`工程安装包文件时,是远小于这个体积的),若对工程文件体积大小较为敏感的使用者,可使用以下建议的替代方案
-1.  删除在本 ***AAChartKit*** 项目文件中,`AAJSFiles`文件夹下的`4`项`.js`文件.需要被删除的文件名称如下
-* AAHighchartsLib.js
-* AAHighchartsMore.js
-* AAFunnel.js
-2.  将`AAChartView.html`文件中的以下内容
-``` html
-<script src="AAHighchartsLib.js">
-</script>
-<script src="AAHighchartsMore.js">
-</script>
-<script src="AAFunnel.js">
-</script>
-```
-替换为
-``` html
-<script src="https://img.hcharts.cn/highcharts/highcharts.js">
-</script>
-<script src="https://img.hcharts.cn/highcharts/highcharts-more.js">
-</script>
-<script src="https://img.hcharts.cn/highcharts/modules/funnel.js">
-</script>
-```
-即可.
-
-此方案是将原本加载放置在本地的`.js`依赖文件改为了加载放置在网络上的`.js`文件,减小了本地文件大小,但有可能会有一定的网络延迟(`0.5s以内`),所以建议 ***AAChartKit*** 用户可根据自己的实际项目的开发需要,酌情选择最终是否使用本替代方案.
 
 ## 待办清单
 
  - [x] 支持图形加载完成后用户添加代理事件
  - [x] 支持图形动态刷新全局内容
  - [x] 支持图形动态刷新纯数据`(series)`内容
- - [ ] 支持图形实时刷新纯数据并动态滚动
+ - [x] 支持图形实时刷新纯数据并动态滚动
  - [x] 支持色彩图层渐变效果
  - [x] 支持3D图形效果,仅对`柱状图`、`条形图`、`扇形图`、`散点图`、`气泡图`等部分图形有效
  - [x] 支持使用`CocoaPods` 导入

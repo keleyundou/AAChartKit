@@ -2,15 +2,17 @@
 ![AAChartKit-LOGO](https://raw.githubusercontent.com/AAChartModel/loadHtmlCssJsDemo-master/master/AAChartKit/AAChartKit-Logo.png)
 
 # AAChartKit
-[![Support](https://img.shields.io/badge/support-iOS%206%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/) <br>
-[![](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/AAChartModel/AAChartKit/blob/master/LICENSE) <br>
-[![](https://img.shields.io/badge/language-OC-green.svg)](https://github.com/AAChartModel/AAChartKit)  <br>
-[![](https://img.shields.io/badge/support-Animation-yellow.svg)](https://github.com/AAChartModel/AAChartKit-Swift)  <br>
-[![](https://img.shields.io/badge/support-Swift-orange.svg)](https://github.com/AAChartModel/AAChartKit-Swift) <br>
-[![](https://jaywcjlove.github.io/sb/lang/chinese.svg)](https://github.com/AAChartModel/AAChartKit/blob/master/CHINESE-README.md) <br>
-[![](https://jaywcjlove.github.io/sb/lang/english.svg)](https://github.com/AAChartModel/AAChartKit) <br>
-[![](https://img.shields.io/badge/Live-ChartsShow-red.svg)](http://htmlpreview.github.io/?https://github.com/AAChartModel/AAChartKit/blob/master/AAChartKitDemo/ChartsDemo/AAChartKitDocumentLive.html)  <br>
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/AAChartModel/AAChartKit.svg)](http://isitmaintained.com/project/AAChartModel/AAChartKit "Average time to resolve an issue") <br>
+[![star this repo](https://githubbadges.com/star.svg?user=AAChartModel&repo=AAChartKit&style=default)](https://github.com/AAChartModel/AAChartKit)
+[![fork this repo](https://githubbadges.com/fork.svg?user=AAChartModel&repo=AAChartKit&style=default)](https://github.com/AAChartModel/AAChartKit/fork)
+[![Support](https://img.shields.io/badge/support-iOS%206%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/) 
+[![](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/AAChartModel/AAChartKit/blob/master/LICENSE) 
+[![](https://img.shields.io/badge/language-OC-green.svg)](https://github.com/AAChartModel/AAChartKit)  
+[![](https://img.shields.io/badge/support-Animation-yellow.svg)](https://github.com/AAChartModel/AAChartKit-Swift)  
+[![](https://img.shields.io/badge/support-Swift-orange.svg)](https://github.com/AAChartModel/AAChartKit-Swift) 
+[![](https://jaywcjlove.github.io/sb/lang/chinese.svg)](https://github.com/AAChartModel/AAChartKit/blob/master/CHINESE-README.md) 
+[![](https://jaywcjlove.github.io/sb/lang/english.svg)](https://github.com/AAChartModel/AAChartKit) 
+[![](https://img.shields.io/badge/Live-ChartsShow-red.svg)](http://htmlpreview.github.io/?https://github.com/AAChartModel/AAChartKit/blob/master/AAChartKitDemo/ChartsDemo/AAChartKitDocumentLive.html)  
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/AAChartModel/AAChartKit.svg)](http://isitmaintained.com/project/AAChartModel/AAChartKit "Average time to resolve an issue") 
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/AAChartModel/AAChartKit.svg)](http://isitmaintained.com/project/AAChartModel/AAChartKit "Percentage of issues still open")
 
 ## [ **English Document 🇬🇧** ](https://github.com/AAChartModel/AAChartKit)  |  [ **简体中文文档 🇨🇳** ](https://github.com/AAChartModel/AAChartKit/blob/master/CHINESE-README.md)| [ **繁體中文文檔 🇭🇰** ](https://github.com/AAChartModel/AAChartKit/blob/master/TRADITIONAL-CHINESE-README.md)
@@ -20,16 +22,25 @@
 
 ## Preface
 
-AAChartKit is an elegant, friendly and easy to use chart library for iOS, based on the open source `Highcharts` JS libraries. AAChartKit is extremely powerful, easy to configure and a pleasure to use. Currently AAChartKit includes support for the following chart types: column chart, bar chart, area chart, area spline chart, line chart, spline chart, radar chart, polar chart, pie chart, bubble chart, pyramid chart, funnel chart, column range and area range chart. More chart types are planned to be supported. AAChartKit gives you easy and fast access to a wide range of chart types, hassle-free and quick to integrate into your own project.
+AAChartKit is an elegant and friendly (user-friendly && enviroment-friendly) chart framework for iOS, based on the open source `Highcharts` JS libraries. AAChartKit is extremely powerful, easy to configure and a pleasure to use. Currently AAChartKit includes support for the following chart types: column chart, bar chart, area chart, area spline chart, line chart, spline chart, radar chart, polar chart, pie chart, bubble chart, pyramid chart, funnel chart, column range and area range chart. More chart types are planned to be supported. AAChartKit gives you easy and fast access to a wide range of chart types, hassle-free and quick to integrate into your own project.
  
 ***
 ## Features
+* 🎂  **Environment friendly**. Support `iOS `、 `iPadOS`、`tvOS` and `macOS`. Totally support `Objective-C` language, and there are more types version such as  `Swift` language version [AAInfographics](https://github.com/AAChartModel/AAChartKit-Swift) 、 `Java` language version [AAChartCore](https://github.com/AAChartModel/AAChartCore) 、`Kotlin` language version [AAInfographics](https://github.com/AAChartModel/AAChartCore-Kotlin) . To get more details you can see the [source code links list](https://github.com/AAChartModel/AAChartKit#source-code).
 
-* 🎂  Support up from `iOS 6`, `ARC` support.
-* 🚀  Powerful and easy to use. It supports `column chart`, `bar chart`, `area chart`, `areaspline chart`, `line chart`, `spline chart`, `radar chart`, `polar chart`, `pie chart`, `bubble chart`, `pyramid chart`, `funnel chart`, `columnrange chart`, `arearange chart`, `mixed chart` and other graphics. Support for more chart types is planned.
-* 🦋  The charts are interactive and animated. The `animation` effect is exquisite, delicate, smooth and beautiful.
-* ⛓. Supports `chain programming syntax` like *Masonry* 
-* 💑  `AAChartView + AAChartModel = Chart`. The AAChartKit follows a minimalist formula: Chart view + Chart model = The chart you want, just like the powerful and beautiful charts lib [AAInfographics](https://github.com/AAChartModel/AAChartKit-Swift)
+* 🚀  **Powerful and easy to use**. It supports `column chart`, `bar chart`, `area chart`, `areaspline chart`, `line chart`, `spline chart`, `radar chart`, `polar chart`, `pie chart`, `bubble chart`, `pyramid chart`, `funnel chart`, `columnrange chart`, `arearange chart`, `mixed chart` and other graphics. Support for more chart types is planned.
+
+* 📝  **Modern Declarative Syntax**. Unlike previous imperative programming techniques, drawing any custom chart in AAChartKit, you don't need to care about the inner implementation details which is annoying && boring. *Describe what you want, you will get what you described*.
+
+* 🎮  **Interactive and animated**. The charts `animation` effect is exquisite, delicate, smooth and beautiful.
+
+* ⛓  **Chain programming**.  Supports `chain programming syntax` like *Masonry* .
+
+* 🦋  **Minimalist**. `AAChartView + AAChartModel = Chart`. The AAChartKit follows a minimalist formula: Chart view + Chart model = The chart you want, just like the powerful and beautiful charts lib [AAInfographics](https://github.com/AAChartModel/AAChartKit-Swift).
+
+* 🖱 **Interaction event callback**. Support for monitoring [user click events and single finger move over events](#support-user-click-events-and-move-over-events), which can be used to achieve double charts linked-working and even multiple charts linkage, as well as other more complex custom user interaction effects.
+
+
 ***
 
 ## Beauty Appreciation
@@ -74,7 +85,7 @@ pod 'AAChartKit', :git => 'https://github.com/AAChartModel/AAChartKit.git'
 #import "AAGlobalMacro.h"
 ```
 
-### Usage
+## Usage
 1. Add the following to your view controller file:
 ```objective-c
 #import "AAChartKit.h"
@@ -95,7 +106,7 @@ _aaChartView.frame = CGRectMake(0, 60, chartViewWidth, chartViewHeight);
 3. Configure the chart model properties: `AAChartModel`                                          
 ```objective-c
 AAChartModel *aaChartModel= AAObject(AAChartModel)
-.chartTypeSet(AAChartTypeColumn)
+.chartTypeSet(AAChartTypeArea)
 .titleSet(@"THE HEAT OF PROGRAMMING LANGUAGE")
 .subtitleSet(@"Virtual Data")
 .categoriesSet(@[@"Java",@"Swift",@"Python",@"Ruby", @"PHP",@"Go",@"C",@"C#",@"C++"])
@@ -122,7 +133,7 @@ AAChartModel *aaChartModel= AAObject(AAChartModel)
 [_aaChartView aa_drawChartWithChartModel:aaChartModel];
 ```
 
-🌹🌹🌹Congratulations! Everything was done!!! You will get what you want!!!🌈🌈🌈
+🎉🎉🎉 Congratulations! Everything was done!!! You will get what you want!!! 🌈🌈🌈
 
 ### Update chart content 
 if you want to refresh chart content,you should do something as follow.According to your actual needs, select the function that fits you.
@@ -244,12 +255,14 @@ The received touch events message contain following content
 
 ### Support for custom the style of chart `AATooltip` through `JavaScript` function
 
-As we all know, AAInfographics support using `HTML` String.  Most of time, the `headerFormat` 、`pointFormat`、`footerFormat` HTML string is enough for customizing chart tooltip string content, However, sometimes the needs of APP is so weird to satified, in this time, you can even customize the chart tooltip style through `JavaScript` function. 
+As we all know, AAChartKit support using `HTML` String.  Most of time, the `headerFormat` 、`pointFormat`、`footerFormat` HTML string is enough for customizing chart tooltip string content, However, sometimes the needs of APP is so weird to satified, in this time, you can even customize the chart tooltip style via `formatter` *JavaScript function*. 
 
-For example, configuring AATooltip instance object properties as follow:
+For example
+
+* configuring AATooltip instance object properties as follow:
 
 
-```objc
+```swift
  /*Custom Tooltip Style ---*/
     AATooltip *tooltip = aaOptions.tooltip;
     tooltip
@@ -275,6 +288,36 @@ For example, configuring AATooltip instance object properties as follow:
 you can get the customized tooltip style chart like this👇
 ![](https://user-images.githubusercontent.com/16357599/56589690-543c5880-6618-11e9-9d18-6bc0fe2fa53f.png)
 
+* configuring AATooltip instance object properties as follow:
+
+```swift
+ aaOptions.tooltip
+ .useHTMLSet(true)
+ .formatterSet(@AAJSFunc(function () {
+     let colorsArr = [];
+     colorsArr.push("mediumspringgreen");
+     colorsArr.push("deepskyblue");
+     colorsArr.push("red");
+     colorsArr.push("sandybrown");
+     let wholeContentString ='<span style=\"' + 'color:lightGray; font-size:13px\"' + '>◉ Time: ' + this.x + ' year</span><br/>';
+     for (let i = 0;i < 4;i++) {
+         let thisPoint = this.points[i];
+         let yValue = thisPoint.y;
+         if (yValue != 0) {
+             let spanStyleStartStr = '<span style=\"' + 'color:'+ colorsArr[i] + '; font-size:13px\"' + '>◉ ';
+             let spanStyleEndStr = '</span> <br/>';
+             wholeContentString += spanStyleStartStr + thisPoint.series.name + ': ' + thisPoint.y + '℃' + spanStyleEndStr;
+         }
+     }
+     return wholeContentString;
+ }))
+ .backgroundColorSet(@"#050505")
+ .borderColorSet(@"#050505")
+ ;
+```
+
+you can get the customized tooltip style chart like this👇  
+![colorfulTooltipChart](https://raw.githubusercontent.com/AAChartModel/Gallery/master/AAChartKit/colorfulTooltipChart.png)
 
 ### Support value range segmentation 
 
@@ -282,9 +325,11 @@ you can get the customized tooltip style chart like this👇
 * chart with value range segmentation `bands 🎀`
 ![plotBandsChart](https://raw.githubusercontent.com/AAChartModel/Gallery/master/AAChartKit/plotBandsChart.png)
 
-
 * chart with value range segmentation `lines 🧶`
 ![plotLinesChart](https://raw.githubusercontent.com/AAChartModel/Gallery/master/AAChartKit/plotLinesChart.png)
+
+* chart with value range segmentation `zones 🧱`
+![seriesZonesChart](https://raw.githubusercontent.com/AAChartModel/Gallery/master/AAChartKit/seriesZonesChart.png)
 
 ### Supported chart types for now
 ```objective-c
@@ -477,10 +522,13 @@ AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, NSString *, zoomRes
 ```
 ## Source Code⛓
 
-Language Version | Project Name | Source Code Link |
------------- | ------------- | ------------- |
-Objective C | AAChartKit | https://github.com/AAChartModel/AAChartKit |
-Swift | AAInfographics | https://github.com/AAChartModel/AAChartKit-Swift |
+Language Version | Project Name | Target Platform | Source Code Link |
+------------ | ------------- |------------- | ------------- |
+Swift | AAInfographics |  iOS |https://github.com/AAChartModel/AAChartKit-Swift |
+Objective C | AAChartKit | iOS | https://github.com/AAChartModel/AAChartKit |
+Kotlin | AAInfographics | Android | https://github.com/AAChartModel/AAChartCore-Kotlin |
+Java | AAChartCore | Android | https://github.com/AAChartModel/AAChartCore |
+
 
 ## LICENSE
 
@@ -502,34 +550,7 @@ AAChartKit is available under the MIT license. See the [LICENSE](https://github.
 * SegmentFault  : https://segmentfault.com/u/huanghunbieguan
 -------------------------------------------------------------------------------
 
-## Postscript
 
-If you want to shrink the size of the `AAChartKit` lib, you should do something like this:
-1. Delete the `.js` file of `AAJSFiles` folder in `AAChartKit`. The names of the files that need to be deleted are the following:
-
-* AAHighchartsLib.js
-* AAHighchartsMore.js
-* AAFunnel.js
-
-2. Change the content of `AAChartView.html` file 
-``` html
-<script src="AAHighchartsLib.js">
-</script>
-<script src="AAHighchartsMore.js">
-</script>
-<script src="AAFunnel.js">
-</script>
-```
-to be 
-
-``` html
-<script src="https://img.hcharts.cn/highcharts/highcharts.js">
-</script>
-<script src="https://img.hcharts.cn/highcharts/highcharts-more.js">
-</script>
-<script src="https://img.hcharts.cn/highcharts/modules/funnel.js">
-</script>
-```
 ## To-Do list
 
  - [x] Support user to add delegate events after the graphics content loading was completed
@@ -540,11 +561,7 @@ to be
  - [x] Support 3D graphics effects, valid only for partial graphics such as `column chart、bar chart、pie charts、scatterplot chart、bubble chart`, etc.
  - [x] Support `CocoaPods`
  - [ ] Support `Carthage`
- - [ ] Support  code coverage test
- - [ ] Support horizontal screen (full screen) effect
- - [ ] Support setting graphics rendering animation freely
- - [ ] Support rendered graphics to generate image files
- - [ ] Support generating image files saved to the system album
+ - [x] Support setting graphics rendering animation freely
  - [x] Support user to configure `AAOptions` model object properties freely
  - [x] Support stacking the graphics 
  - [x] Support reversing the graphics axis 
@@ -557,6 +574,8 @@ to be
  - [x] Support rendering the Nightingale rose 🌹chart
  - [x] Support rendering the circular progress bar chart 
  - [x] Support adding clicked event callbacks for graphics
+ - [ ] Support  code coverage test
+
 
 [1]:  https://raw.githubusercontent.com/adad184/MMTweenAnimation/master/Images/1.gif
 [2]:  https://raw.githubusercontent.com/adad184/MMTweenAnimation/master/Images/2.gif

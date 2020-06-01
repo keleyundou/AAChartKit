@@ -66,12 +66,14 @@
     
     AAChartType chartType = [self configureTheChartType];
     self.title = [NSString stringWithFormat:@"%@ chart",chartType];
-    [self setUpTheAAChartViewWithChartType:chartType];
     [self setUpTheNextTypeChartButton];
+    
+    [self drawChart];
+    
 }
 
 - (AAChartType)configureTheChartType {
-    switch (self.chartType) {
+    switch (_chartType) {
         case SecondeViewControllerChartTypeColumn: return AAChartTypeColumn;
         case SecondeViewControllerChartTypeBar: return AAChartTypeBar;
         case SecondeViewControllerChartTypeArea: return AAChartTypeArea;
@@ -84,56 +86,87 @@
     }
 }
 
-- (void)setUpTheAAChartViewWithChartType:(AAChartType)chartType {
+- (void)drawChart {
+    [self setupAAChartView];
+    AAChartType chartType = [self configureTheChartType];
+    [self setupAAChartViewWithChartType:chartType];
+    [_aaChartView aa_drawChartWithChartModel:_aaChartModel];
+    [self setupAAChartViewEventBlockHandler];
+}
+
+- (void)setupAAChartView {
     CGFloat chartViewWidth  = self.view.frame.size.width;
-    CGFloat chartViewHeight = self.view.frame.size.height-220;
-    self.aaChartView = [[AAChartView alloc]init];
-    self.aaChartView.frame = CGRectMake(0, 60, chartViewWidth, chartViewHeight);
-    self.aaChartView.delegate = self;
-    self.aaChartView.scrollEnabled = NO;//禁用 AAChartView 滚动效果
+    CGFloat chartViewHeight = self.view.frame.size.height - 220;
+    _aaChartView = [[AAChartView alloc]init];
+    _aaChartView.frame = CGRectMake(0, 60, chartViewWidth, chartViewHeight);
+    _aaChartView.delegate = self;
+    _aaChartView.scrollEnabled = NO;//禁用 AAChartView 滚动效果
 //    设置aaChartVie 的内容高度(content height)
-//    self.aaChartView.contentHeight = chartViewHeight*2;
+//    _aaChartView.contentHeight = chartViewHeight * 2;
 //    设置aaChartVie 的内容宽度(content  width)
-//    self.aaChartView.contentWidth = chartViewWidth*2;
-    [self.view addSubview:self.aaChartView];
-    self.aaChartView.backgroundColor = [UIColor clearColor];
-    
-    
+//    _aaChartView.contentWidth = chartViewWidth * 2;
+    [self.view addSubview:_aaChartView];
     //设置 AAChartView 的背景色是否为透明
-    self.aaChartView.isClearBackgroundColor = YES;
-    
-    self.aaChartModel= AAChartModel.new
+    _aaChartView.isClearBackgroundColor = YES;
+}
+
+- (void)setupAAChartViewWithChartType:(AAChartType)chartType {
+    _aaChartModel = AAChartModel.new
     .chartTypeSet(chartType)//图表类型
     .titleSet(@"")//图表主标题
     .subtitleSet(@"")//图表副标题
-    .yAxisLineWidthSet(@0)//Y轴轴线线宽为0即是隐藏Y轴轴线
-    .colorsThemeSet(@[@"#fe117c",@"#ffc069",@"#06caf4",@"#7dffc0"])//设置主体颜色数组
-    .yAxisTitleSet(@"")//设置 Y 轴标题
-    .tooltipValueSuffixSet(@"℃")//设置浮动提示框单位后缀
+    .colorsThemeSet(@[@"#fe117c",@"#ffc069",@"#06caf4",@"#7dffc0"])//设置主题颜色数组
     .backgroundColorSet(@"#4b2b7f")
+    .tooltipValueSuffixSet(@"℃")//设置浮动提示框单位后缀
+    .yAxisTitleSet(@"")//设置 Y 轴标题
+    .yAxisLineWidthSet(@0)//Y轴轴线线宽为0即是隐藏Y轴轴线
     .yAxisGridLineWidthSet(@0)//y轴横向分割线宽度为0(即是隐藏分割线)
     .touchEventEnabledSet(true)//支持用户点击事件
     .seriesSet(@[
-                 AASeriesElement.new
-                 .nameSet(@"2017")
-                 .dataSet(@[@7.0, @6.9, @9.5, @14.5, @18.2, @21.5, @25.2, @26.5, @23.3, @18.3, @13.9, @9.6]),
-                 AASeriesElement.new
-                 .nameSet(@"2018")
-                 .dataSet(@[@0.2, @0.8, @5.7, @11.3, @17.0, @22.0, @24.8, @24.1, @20.1, @14.1, @8.6, @2.5]),
-                 AASeriesElement.new
-                 .nameSet(@"2019")
-                 .dataSet(@[@0.9, @0.6, @3.5, @8.4, @13.5, @17.0, @18.6, @17.9, @14.3, @9.0, @3.9, @1.0]),
-                 AASeriesElement.new
-                 .nameSet(@"2020")
-                 .dataSet(@[@3.9, @4.2, @5.7, @8.5, @11.9, @15.2, @17.0, @16.6, @14.2, @10.3, @6.6, @4.8]),
-                 ]
-               );
+        AASeriesElement.new
+        .nameSet(@"2017")
+        .dataSet(@[@7.0, @6.9, @9.5, @14.5, @18.2, @21.5, @25.2, @26.5, @23.3, @18.3, @13.9, @9.6]),
+        AASeriesElement.new
+        .nameSet(@"2018")
+        .dataSet(@[@0.2, @0.8, @5.7, @11.3, @17.0, @22.0, @24.8, @24.1, @20.1, @14.1, @8.6, @2.5]),
+        AASeriesElement.new
+        .nameSet(@"2019")
+        .dataSet(@[@0.9, @0.6, @3.5, @8.4, @13.5, @17.0, @18.6, @17.9, @14.3, @9.0, @3.9, @1.0]),
+        AASeriesElement.new
+        .nameSet(@"2020")
+        .dataSet(@[@3.9, @4.2, @5.7, @8.5, @11.9, @15.2, @17.0, @16.6, @14.2, @10.3, @6.6, @4.8]),
+    ]);
+    
     [self configureTheStyleForDifferentTypeChart];//为不同类型图表设置样式
     
     /*配置 Y 轴标注线,解开注释,即可查看添加标注线之后的图表效果(NOTE:必须设置 Y 轴可见)*/
     //    [self configureTheYAxisPlotLineForAAChartView];
+}
+
+- (void)setupAAChartViewEventBlockHandler {
+    //获取图表加载完成事件
+    [_aaChartView didFinishLoadHandler:^(AAChartView *aaChartView) {
+        NSLog(@"🚀🚀🚀🚀 AAChartView content did finish load!!!");
+    }];
     
-    [self.aaChartView aa_drawChartWithChartModel:_aaChartModel];
+    //获取图表上的手指点击及滑动事件
+    [_aaChartView moveOverEventHandler:^(AAChartView *aaChartView,
+                                         AAMoveOverEventMessageModel *message) {
+        NSDictionary *messageDic = @{
+            @"category":message.category,
+            @"index":@(message.index),
+            @"name":message.name,
+            @"offset":message.offset,
+            @"x":message.x,
+            @"y":message.y
+        };
+        
+        NSString *str1 = [NSString stringWithFormat:@"👌👌👌👌 selected point series element name: %@\n",
+                          message.name];
+        NSString *str2 = [NSString stringWithFormat:@"user finger moved over!!!,get the move over event message: %@",
+                          messageDic];
+        NSLog(@"%@%@",str1, str2);
+    }];
 }
 
 /**
@@ -150,139 +183,170 @@
     .yAxisAllowDecimalsSet(NO)//是否允许Y轴坐标值小数
     .yAxisTickPositionsSet(@[@(0),@(25),@(50),@(75),@(100)])//指定y轴坐标
     .yAxisPlotLinesSet(@[
-                         AAPlotLinesElement.new
-                         .colorSet(@"#F05353")//颜色值(16进制)
-                         .dashStyleSet(AALineDashStyleTypeLongDashDot)//样式：Dash,Dot,Solid等,默认Solid
-                         .widthSet(@(1)) //标示线粗细
-                         .valueSet(@(20)) //所在位置
-                         .zIndexSet(@(1)) //层叠,标示线在图表中显示的层叠级别，值越大，显示越向前
-                         .labelSet(AALabel.new
-                                   .textSet(@"标示线1")
-                                   .styleSet(AAStyle.new
-                                             .colorSet(@"#ff0000")))
-                         ,AAPlotLinesElement.new
-                         .colorSet(@"#33BDFD")
-                         .dashStyleSet(AALineDashStyleTypeLongDashDot)
-                         .widthSet(@(1))
-                         .valueSet(@(40))
-                         .labelSet(AALabel.new
-                                   .textSet(@"标示线2")
-                                   .styleSet(AAStyle.new
-                                             .colorSet(@"#00ff00")))
-                         ,AAPlotLinesElement.new
-                         .colorSet(@"#ADFF2F")
-                         .dashStyleSet(AALineDashStyleTypeLongDashDot)
-                         .widthSet(@(1))
-                         .valueSet(@(60))
-                         .labelSet(AALabel.new
-                                   .textSet(@"标示线3")
-                                   .styleSet(AAStyle.new
-                                             .colorSet(@"#0000ff")))
-
-                         ]
-                   );
+        AAPlotLinesElement.new
+        .colorSet(@"#F05353")//颜色值(16进制)
+        .dashStyleSet(AAChartLineDashStyleTypeLongDashDot)//样式：Dash,Dot,Solid等,默认Solid
+        .widthSet(@(1)) //标示线粗细
+        .valueSet(@(20)) //所在位置
+        .zIndexSet(@(1)) //层叠,标示线在图表中显示的层叠级别，值越大，显示越向前
+        .labelSet(AALabel.new
+                  .textSet(@"标示线1")
+                  .styleSet(AAStyle.new
+                            .colorSet(@"#ff0000")))
+        ,AAPlotLinesElement.new
+        .colorSet(@"#33BDFD")
+        .dashStyleSet(AAChartLineDashStyleTypeLongDashDot)
+        .widthSet(@(1))
+        .valueSet(@(40))
+        .labelSet(AALabel.new
+                  .textSet(@"标示线2")
+                  .styleSet(AAStyle.new
+                            .colorSet(@"#00ff00")))
+        ,AAPlotLinesElement.new
+        .colorSet(@"#ADFF2F")
+        .dashStyleSet(AAChartLineDashStyleTypeLongDashDot)
+        .widthSet(@(1))
+        .valueSet(@(60))
+        .labelSet(AALabel.new
+                  .textSet(@"标示线3")
+                  .styleSet(AAStyle.new
+                            .colorSet(@"#0000ff")))
+        
+    ]);
 }
 
 - (void)configureTheStyleForDifferentTypeChart {
-    if (self.chartType == SecondeViewControllerChartTypeColumn || self.chartType == SecondeViewControllerChartTypeBar) {
-        _aaChartModel
-        .categoriesSet(@[@"Java", @"Swift", @"Python", @"Ruby", @"PHP", @"Go",@"C", @"C#", @"C++", @"Perl", @"R", @"MATLAB", @"SQL"])//设置 X 轴坐标文字内容
-        .animationTypeSet(AAChartAnimationBounce)//图形的渲染动画为弹性动画
-        .animationDurationSet(@(1200))//图形渲染动画时长为1200毫秒
-        .yAxisTitleSet(@"");
-    } else if (self.chartType == SecondeViewControllerChartTypeArea || self.chartType == SecondeViewControllerChartTypeAreaspline) {
-        _aaChartModel
-        .markerSymbolStyleSet(AAChartSymbolStyleTypeInnerBlank)//设置折线连接点样式为:内部白色
-        .easyGradientColorsSet(true)//启用渐变色
-        .animationTypeSet(AAChartAnimationEaseOutQuart)//图形的渲染动画为 EaseOutQuart 动画
-        .xAxisCrosshairWidthSet(@0.9)//Zero width to disable crosshair by default
-        .xAxisCrosshairColorSet(@"#FFE4C4")//(浓汤)乳脂,番茄色准星线
-        .xAxisCrosshairDashStyleTypeSet(AALineDashStyleTypeLongDashDot);
-        if (self.chartType == SecondeViewControllerChartTypeLine) {
-            _aaChartModel
-            .categoriesSet(@[@"Java", @"Swift", @"Python", @"Ruby", @"PHP", @"Go",@"C", @"C#", @"C++", @"Perl", @"R", @"MATLAB", @"SQL"]);//设置 X 轴坐标文字内容
-        } else if (self.chartType == SecondeViewControllerChartTypeAreaspline) {
-            _aaChartModel
-            .xAxisTickIntervalSet(@3)//设置 X轴坐标点的间隔数,默认是1(手机端的屏幕较为狭窄, 如果X轴坐标点过多,文字过于密集的时候可以设置此属性值,用户的密集恐惧症将得到有效治疗😝)
-            .seriesSet(@[
-                         AASeriesElement.new
-                         .nameSet(@"Tokyo Hot")
-                         .dataSet(@[@0.45, @0.43, @0.50, @0.55, @0.58, @0.62, @0.83, @0.39, @0.56, @0.67, @0.50, @0.34, @0.50, @0.67, @0.58, @0.29, @0.46, @0.23, @0.47, @0.46, @0.38, @0.56, @0.48, @0.36]),
-                         AASeriesElement.new
-                         .nameSet(@"Berlin Hot")
-                         .dataSet(@[@0.38, @0.31, @0.32, @0.32, @0.64, @0.66, @0.86, @0.47, @0.52, @0.75, @0.52, @0.56, @0.54, @0.60, @0.46, @0.63, @0.54, @0.51, @0.58, @0.64, @0.60, @0.45, @0.36, @0.67]),
-                         AASeriesElement.new
-                         .nameSet(@"London Hot")
-                         .dataSet(@[@0.46, @0.32, @0.53, @0.58, @0.86, @0.68, @0.85, @0.73, @0.69, @0.71, @0.91, @0.74, @0.60, @0.50, @0.39, @0.67, @0.55, @0.49, @0.65, @0.45, @0.64, @0.47, @0.63, @0.64]),
-                         AASeriesElement.new
-                         .nameSet(@"NewYork Hot")
-                         .dataSet(@[@0.60, @0.51, @0.52, @0.53, @0.64, @0.84, @0.65, @0.68, @0.63, @0.47, @0.72, @0.60, @0.65, @0.74, @0.66, @0.65, @0.71, @0.59, @0.65, @0.77, @0.52, @0.53, @0.58, @0.53]),
-                         ]);
-        }
-    } else if (self.chartType == SecondeViewControllerChartTypeLine || self.chartType == SecondeViewControllerChartTypeSpline) {
-        _aaChartModel
-        .markerSymbolStyleSet(AAChartSymbolStyleTypeBorderBlank)//设置折线连接点样式为:边缘白色
-        .xAxisCrosshairWidthSet(@01.2)//Zero width to disable crosshair by default
-        .xAxisCrosshairColorSet(@"#778899")//浅石板灰准星线
-        .xAxisCrosshairDashStyleTypeSet(AALineDashStyleTypeLongDashDotDot);
-
-        if (self.chartType == SecondeViewControllerChartTypeLine) {
-            _aaChartModel.categories = @[@"Java", @"Swift", @"Python", @"Ruby", @"PHP", @"Go",@"C", @"C#", @"C++", @"Perl", @"R", @"MATLAB", @"SQL"];//设置 X 轴坐标文字内容
-        } else if (self.chartType == SecondeViewControllerChartTypeSpline) {
-            _aaChartModel
-            .markerRadiusSet(@0)
-            .seriesSet(@[
-                         AASeriesElement.new
-                         .nameSet(@"2017")
-                         .lineWidthSet(@5.0)
-                         .dataSet(@[@50.1, @320.2, @230.3, @370.4, @230.5, @400.6,]),
-                         AASeriesElement.new
-                         .nameSet(@"2018")
-                         .lineWidthSet(@5.0)
-                         .dataSet(@[@80.1, @390.2, @210.3, @340.4, @240.5, @350.6,]),
-                         AASeriesElement.new
-                         .nameSet(@"2019")
-                         .lineWidthSet(@5.0)
-                         .dataSet(@[@100.1, @370.2, @180.3, @280.4, @260.5, @300.6,]),
-                         AASeriesElement.new
-                         .nameSet(@"2020")
-                         .lineWidthSet(@5.0)
-                         .dataSet(@[@130.1, @350.2, @160.3, @310.4, @250.5, @268.6,]),
-                         ]);
-        }
-    } else if (self.chartType == SecondeViewControllerChartTypeStepLine || self.chartType == SecondeViewControllerChartTypeStepArea) {
-        _aaChartModel.yAxisVisibleSet(false);
-        if (self.chartType == SecondeViewControllerChartTypeStepLine) {
-            _aaChartModel.markerSymbolStyleSet(AAChartSymbolStyleTypeBorderBlank);
-        } else {
-            _aaChartModel.easyGradientColorsSet(true);
-        }
-        _aaChartModel
-        .seriesSet(@[
-                     AASeriesElement.new
-                     .nameSet(@"Berlin")
-                     .dataSet(@[@149.9, @171.5, @106.4, @129.2, @144.0, @176.0, @135.6, @188.5, @276.4, @214.1, @95.6, @54.4])
-                     .stepSet(@true),//设置折线样式为直方折线,连接点位置默认靠左👈
-                     AASeriesElement.new
-                     .nameSet(@"New York")
-                     .dataSet(@[@83.6, @78.8, @188.5, @93.4, @106.0, @84.5, @105.0, @104.3, @131.2, @153.5, @226.6, @192.3])
-                     .stepSet(@true),//设置折线样式为直方折线,连接点位置默认靠左👈
-                     AASeriesElement.new
-                     .nameSet(@"Tokyo")
-                     .dataSet(@[@48.9, @38.8, @19.3, @41.4, @47.0, @28.3, @59.0, @69.6, @52.4, @65.2, @53.3, @72.2])
-                     .stepSet(@true)//设置折线样式为直方折线,连接点位置默认靠左👈
-                     ]);
+    if (_chartType == SecondeViewControllerChartTypeColumn
+        || _chartType == SecondeViewControllerChartTypeBar) {
+        [self configureColumnChartAndBarChartStyle];
+    } else if (_chartType == SecondeViewControllerChartTypeArea
+               || _chartType == SecondeViewControllerChartTypeAreaspline) {
+        [self configureAreaChartAndAreasplineChartStyle];
+    } else if (_chartType == SecondeViewControllerChartTypeLine
+               || _chartType == SecondeViewControllerChartTypeSpline) {
+        [self configureLineChartAndSplineChartStyle];
+    } else if (_chartType == SecondeViewControllerChartTypeStepLine
+               || _chartType == SecondeViewControllerChartTypeStepArea) {
+        [self configureStepLineChartAndSteAreaChartStyle];
     }
+}
+
+- (void)configureColumnChartAndBarChartStyle {
+    _aaChartModel
+    .categoriesSet(@[@"Java", @"Swift", @"Python", @"Ruby", @"PHP", @"Go",@"C", @"C#", @"C++", @"Perl", @"R", @"MATLAB", @"SQL"])//设置 X 轴坐标文字内容
+    .animationTypeSet(AAChartAnimationEaseOutCubic)//图形的渲染动画类型为 EaseOutCubic
+    .animationDurationSet(@(1200))//图形渲染动画时长为1200毫秒
+    .yAxisTitleSet(@"");
+}
+
+- (void)configureAreaChartAndAreasplineChartStyle {
+    _aaChartModel
+    .markerSymbolStyleSet(AAChartSymbolStyleTypeInnerBlank)//设置折线连接点样式为:内部白色
+    .easyGradientColorsSet(true)//启用渐变色
+    .animationTypeSet(AAChartAnimationEaseOutQuart)//图形的渲染动画为 EaseOutQuart 动画
+    .xAxisCrosshairWidthSet(@0.9)//Zero width to disable crosshair by default
+    .xAxisCrosshairColorSet(@"#FFE4C4")//(浓汤)乳脂,番茄色准星线
+    .xAxisCrosshairDashStyleTypeSet(AAChartLineDashStyleTypeLongDashDot);
+    if (_chartType == SecondeViewControllerChartTypeArea) {
+        _aaChartModel
+        .categoriesSet(@[@"Java", @"Swift", @"Python", @"Ruby", @"PHP", @"Go",@"C", @"C#", @"C++", @"Perl", @"R", @"MATLAB", @"SQL"]);//设置 X 轴坐标文字内容
+    } else if (_chartType == SecondeViewControllerChartTypeAreaspline) {
+        AASeriesElement *element1 = AASeriesElement.new
+        .nameSet(@"Predefined symbol")
+        .dataSet(@[@0.45, @0.43, @0.50, @0.55, @0.58, @0.62, @0.83, @0.39, @0.56, @0.67, @0.50, @0.34, @0.50, @0.67, @0.58, @0.29, @0.46, @0.23, @0.47, @0.46, @0.38, @0.56, @0.48, @0.36]);
+        AASeriesElement *element2 = AASeriesElement.new
+        .nameSet(@"Image symbol")
+        .dataSet(@[@0.38, @0.31, @0.32, @0.32, @0.64, @0.66, @0.86, @0.47, @0.52, @0.75, @0.52, @0.56, @0.54, @0.60, @0.46, @0.63, @0.54, @0.51, @0.58, @0.64, @0.60, @0.45, @0.36, @0.67]);
+        AASeriesElement *element3 = AASeriesElement.new
+        .nameSet(@"Base64 symbol (*)")
+        .dataSet(@[@0.46, @0.32, @0.53, @0.58, @0.86, @0.68, @0.85, @0.73, @0.69, @0.71, @0.91, @0.74, @0.60, @0.50, @0.39, @0.67, @0.55, @0.49, @0.65, @0.45, @0.64, @0.47, @0.63, @0.64]);
+        AASeriesElement *element4 = AASeriesElement.new
+        .nameSet(@"Custom symbol")
+        .dataSet(@[@0.60, @0.51, @0.52, @0.53, @0.64, @0.84, @0.65, @0.68, @0.63, @0.47, @0.72, @0.60, @0.65, @0.74, @0.66, @0.65, @0.71, @0.59, @0.65, @0.77, @0.52, @0.53, @0.58, @0.53]);
+        
+        _aaChartModel
+        .xAxisTickIntervalSet(@3)//设置 X轴坐标点的间隔数,默认是1(手机端的屏幕较为狭窄, 如果X轴坐标点过多,文字过于密集的时候可以设置此属性值,用户的密集恐惧症将得到有效治疗😝)
+        .seriesSet(@[element1,element2,element3,element4]);
+    }
+}
+
+- (void)configureLineChartAndSplineChartStyle {
+    _aaChartModel
+    .markerSymbolStyleSet(AAChartSymbolStyleTypeBorderBlank)//设置折线连接点样式为:边缘白色
+    .xAxisCrosshairWidthSet(@01.2)//Zero width to disable crosshair by default
+    .xAxisCrosshairColorSet(@"#778899")//浅石板灰准星线
+    .xAxisCrosshairDashStyleTypeSet(AAChartLineDashStyleTypeLongDashDotDot);
+    
+    if (_chartType == SecondeViewControllerChartTypeLine) {
+        _aaChartModel.categories = @[@"Java", @"Swift", @"Python", @"Ruby", @"PHP", @"Go",@"C", @"C#", @"C++", @"Perl", @"R", @"MATLAB", @"SQL"];//设置 X 轴坐标文字内容
+    } else if (_chartType == SecondeViewControllerChartTypeSpline) {
+        AASeriesElement *element1 = AASeriesElement.new
+        .nameSet(@"2017")
+        .lineWidthSet(@5.0)
+        .dataSet(@[@50.1, @320.2, @230.3, @370.4, @230.5, @400.6,]);
+        AASeriesElement *element2 = AASeriesElement.new
+        .nameSet(@"2018")
+        .lineWidthSet(@5.0)
+        .dataSet(@[@80.1, @390.2, @210.3, @340.4, @240.5, @350.6,]);
+        AASeriesElement *element3 = AASeriesElement.new
+        .nameSet(@"2019")
+        .lineWidthSet(@5.0)
+        .dataSet(@[@100.1, @370.2, @180.3, @280.4, @260.5, @300.6,]);
+        AASeriesElement *element4 = AASeriesElement.new
+        .nameSet(@"2020")
+        .lineWidthSet(@5.0)
+        .dataSet(@[@130.1, @350.2, @160.3, @310.4, @250.5, @268.6,]);
+        
+        _aaChartModel
+        .markerRadiusSet(@0)
+        .seriesSet(@[element1,element2,element3,element4]);
+    }
+}
+
+- (void)configureStepLineChartAndSteAreaChartStyle {
+    _aaChartModel.yAxisVisibleSet(false);
+    if (_chartType == SecondeViewControllerChartTypeStepLine) {
+        _aaChartModel.markerSymbolStyleSet(AAChartSymbolStyleTypeBorderBlank);
+    } else {
+        _aaChartModel.easyGradientColorsSet(true);
+    }
+    AASeriesElement *element1 = AASeriesElement.new
+    .nameSet(@"Berlin")
+    .dataSet(@[@149.9, @171.5, @106.4, @129.2, @144.0, @176.0, @135.6, @188.5, @276.4, @214.1, @95.6, @54.4])
+    .stepSet(@true);//设置折线样式为直方折线,连接点位置默认靠左👈
+    AASeriesElement *element2 = AASeriesElement.new
+    .nameSet(@"New York")
+    .dataSet(@[@83.6, @78.8, @188.5, @93.4, @106.0, @84.5, @105.0, @104.3, @131.2, @153.5, @226.6, @192.3])
+    .stepSet(@true);//设置折线样式为直方折线,连接点位置默认靠左👈
+    AASeriesElement *element3 = AASeriesElement.new
+    .nameSet(@"Tokyo")
+    .dataSet(@[@48.9, @38.8, @19.3, @41.4, @47.0, @28.3, @59.0, @69.6, @52.4, @65.2, @53.3, @72.2])
+    .stepSet(@true);//设置折线样式为直方折线,连接点位置默认靠左👈
+    
+    _aaChartModel.seriesSet(@[element1,element2,element3,]);
+
 }
 
 #pragma mark -- AAChartView delegate
 - (void)aaChartViewDidFinishLoad:(AAChartView *)aaChartView {
-    NSLog(@"🔥🔥🔥🔥🔥 AAChartView content did finish load!!!");
+    NSLog(@"🔥 AAChartView content did finish load!!!");
 }
 
 - (void)aaChartView:(AAChartView *)aaChartView moveOverEventWithMessage:(AAMoveOverEventMessageModel *)message {
-    NSLog(@"🚀selected point series element name: %@",message.name);
-    NSLog(@"🦋🦋🦋🦋🦋 user finger moved over!!!,get the move over event message: %@",[AAJsonConverter dictionaryWithJsonString:[AAJsonConverter getPureOptionsString:message]] );
+    NSDictionary *messageDic = @{
+        @"category":message.category,
+        @"index":@(message.index),
+        @"name":message.name,
+        @"offset":message.offset,
+        @"x":message.x,
+        @"y":message.y
+    };
+    
+    NSString *str1 = [NSString stringWithFormat:@"👌 selected point series element name: %@\n",
+                      message.name];
+    NSString *str2 = [NSString stringWithFormat:@"user finger moved over!!!,get the move over event message: %@",
+                      messageDic];
+    NSLog(@"%@%@",str1, str2);
 }
 
 
@@ -290,8 +354,8 @@
     NSArray *segmentedNamesArr;
     NSArray *typeLabelNameArr;
     
-    if (self.chartType == SecondeViewControllerChartTypeColumn
-        ||self.chartType == SecondeViewControllerChartTypeBar) {
+    if (_chartType == SecondeViewControllerChartTypeColumn
+        ||_chartType == SecondeViewControllerChartTypeBar) {
         segmentedNamesArr = @[
                               @[@"No stacking",
                                 @"Normal stacking",
@@ -351,14 +415,14 @@
             NSArray *stackingArr = @[AAChartStackingTypeFalse,
                                      AAChartStackingTypeNormal,
                                      AAChartStackingTypePercent];
-            self.aaChartModel.stacking = stackingArr[segmentedControl.selectedSegmentIndex];
+            _aaChartModel.stacking = stackingArr[segmentedControl.selectedSegmentIndex];
         }
             break;
             
         case 1: {
-            if (self.chartType == 0 || self.chartType == 1 ) {
+            if (_chartType == 0 || _chartType == 1 ) {
                 NSArray *borderRadiusArr = @[ @0, @10, @100 ];
-                self.aaChartModel.borderRadius = borderRadiusArr[segmentedControl.selectedSegmentIndex];
+                _aaChartModel.borderRadius = borderRadiusArr[segmentedControl.selectedSegmentIndex];
             } else {
                 
                 NSArray *symbolArr = @[AAChartSymbolTypeCircle,
@@ -366,7 +430,7 @@
                                        AAChartSymbolTypeDiamond,
                                        AAChartSymbolTypeTriangle,
                                        AAChartSymbolTypeTriangle_down];
-                self.aaChartModel.markerSymbol = symbolArr[segmentedControl.selectedSegmentIndex];
+                _aaChartModel.markerSymbol = symbolArr[segmentedControl.selectedSegmentIndex];
             }
         }
             break;
@@ -379,12 +443,12 @@
 }
 
 - (void)refreshTheChartView {
-    [self.aaChartView aa_refreshChartWithChartModel:self.aaChartModel];
+    [_aaChartView aa_refreshChartWithChartModel:_aaChartModel];
 }
 
 - (void)setUpTheSwitchs {
     NSArray *nameArr;
-    if (self.chartType == SecondeViewControllerChartTypeColumn || self.chartType == SecondeViewControllerChartTypeBar) {
+    if (_chartType == SecondeViewControllerChartTypeColumn || _chartType == SecondeViewControllerChartTypeBar) {
         nameArr = @[
                     @"xAxisReversed",
                     @"yAxisReversed",
@@ -435,17 +499,17 @@
 
 - (void)switchViewClicked:(UISwitch *)switchView {
     switch (switchView.tag) {
-        case 0: self.aaChartModel.xAxisReversed = switchView.on;
+        case 0: _aaChartModel.xAxisReversed = switchView.on;
             break;
-        case 1: self.aaChartModel.yAxisReversed = switchView.on;
+        case 1: _aaChartModel.yAxisReversed = switchView.on;
             break;
-        case 2: self.aaChartModel.inverted = switchView.on;
+        case 2: _aaChartModel.inverted = switchView.on;
             break;
-        case 3: self.aaChartModel.polar = switchView.on;
+        case 3: _aaChartModel.polar = switchView.on;
             break;
-        case 4: self.aaChartModel.dataLabelEnabled = switchView.on;
+        case 4: _aaChartModel.dataLabelsEnabled = switchView.on;
             break;
-        case 5: self.aaChartModel.markerRadius = switchView.on ? @0 : @5;
+        case 5: _aaChartModel.markerRadius = switchView.on ? @0 : @5;
             break;
         default:
             break;
@@ -464,17 +528,17 @@
 }
 
 - (void)monitorTap {
-    self.chartType = self.chartType + 1;
+    _chartType = _chartType + 1;
     NSString *chartType = [self configureTheChartType];
     self.title = [NSString stringWithFormat:@"%@ chart",chartType];
     _aaChartModel.chartType = chartType;
-    if (self.chartType == SecondeViewControllerChartTypeStepArea
-        || self.chartType == SecondeViewControllerChartTypeStepLine) {
+    if (_chartType == SecondeViewControllerChartTypeStepArea
+        || _chartType == SecondeViewControllerChartTypeStepLine) {
         [_aaChartModel.series enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             AASeriesElement *element = obj;
             element.step = @YES;
         }];
-    } else if (self.chartType == SecondeViewControllerChartTypeScatter) {
+    } else if (_chartType == SecondeViewControllerChartTypeScatter) {
         [_aaChartModel.series enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             AASeriesElement *element = obj;
             element.step = @NO;
@@ -483,8 +547,8 @@
     
     [_aaChartView aa_refreshChartWithChartModel:_aaChartModel];
     
-    if (self.chartType == SecondeViewControllerChartTypeScatter) {
-        self.chartType = -1;//重新开始
+    if (_chartType == SecondeViewControllerChartTypeScatter) {
+        _chartType = -1;//重新开始
     }
 }
 

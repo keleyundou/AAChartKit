@@ -37,7 +37,11 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        _enabled = true;
         _animation = true;
+        _shared = true;
+        _crosshairs = true;
+        _followTouchMove = true;
     }
     return self;
 }
@@ -47,7 +51,7 @@ AAPropSetFuncImplementation(AATooltip, NSString *, backgroundColor) //背景色
 AAPropSetFuncImplementation(AATooltip, NSString *, borderColor) //边框颜色
 AAPropSetFuncImplementation(AATooltip, NSNumber *, borderRadius) //边框的圆角半径
 AAPropSetFuncImplementation(AATooltip, NSNumber *, borderWidth) //边框宽度
-AAPropSetFuncImplementation(AATooltip, NSDictionary *, style) //为提示框添加CSS样式。提示框同样能够通过 CSS 类 .highcharts-tooltip 来设定样式。 默认是：@{@"color":@"#ffffff",@"cursor":@"default",@"fontSize":@"12px",@"pointerEvents":@"none",@"whiteSpace":@"nowrap" }
+AAPropSetFuncImplementation(AATooltip, AAStyle *, style) //为提示框添加CSS样式。提示框同样能够通过 CSS 类 .highcharts-tooltip 来设定样式。 默认是：@{@"color":@"#ffffff",@"cursor":@"default",@"fontSize":@"12px",@"pointerEvents":@"none",@"whiteSpace":@"nowrap" }
 
 AAPropSetFuncImplementation(AATooltip, BOOL,       enabled) 
 AAPropSetFuncImplementation(AATooltip, BOOL,       useHTML) 
@@ -59,7 +63,7 @@ AAPropSetFuncImplementation(AATooltip, NSNumber *, valueDecimals) //设置取值
 AAPropSetFuncImplementation(AATooltip, BOOL,       shared) 
 AAPropSetFuncImplementation(AATooltip, BOOL,       crosshairs) 
 AAPropSetFuncImplementation(AATooltip, NSString *, valueSuffix) 
-//AAPropSetFuncImplementation(AATooltip, BOOL,       followTouchMove)
+AAPropSetFuncImplementation(AATooltip, BOOL,       followTouchMove)
 
 - (void)setFormatter:(NSString *)formatter {
     _formatter = [AAJSStringPurer pureJavaScriptFunctionStringWithString:formatter];

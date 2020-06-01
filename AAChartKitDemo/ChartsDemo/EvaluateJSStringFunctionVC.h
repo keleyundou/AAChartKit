@@ -1,9 +1,9 @@
 //
-//  ChartSeriesHideOrShowVC.h
+//  EvaluateJSStringFunctionVC.h
 //  AAChartKitDemo
 //
-//  Created by AnAn on 2018/11/30.
-//  Copyright © 2018 Danny boy. All rights reserved.
+//  Created by AnAn on 2019/9/22.
+//  Copyright © 2019 Danny boy. All rights reserved.
 //*************** ...... SOURCE CODE ...... ***************
 //***...................................................***
 //*** https://github.com/AAChartModel/AAChartKit        ***
@@ -31,13 +31,13 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "AAChartKit.h"
-
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ChartSeriesHideOrShowVC : UIViewController
-@property (nonatomic, assign) NSInteger chartTypeIndex;
+@interface EvaluateJSStringFunctionVC : UIViewController
+
+@property (nonatomic, assign) NSInteger sampleChartTypeIndex;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,15 +1,16 @@
 //
-//  CustomStyleChartVC.h
+//  AAPane.m
 //  AAChartKitDemo
 //
-//  Created by AnAn on 2018/11/13.
-//  Copyright © 2018 Danny boy. All rights reserved.
+//  Created by AnAn on 2020/5/9.
+//  Copyright © 2020 An An. All rights reserved.
+//
 //*************** ...... SOURCE CODE ...... ***************
 //***...................................................***
-//*** https://github.com/AAChartModel/AAChartKit        ***
-//*** https://github.com/AAChartModel/AAChartKit-Swift  ***
+//***    https://github.com/AAChartModel/AAChartKit     ***
 //***...................................................***
 //*************** ...... SOURCE CODE ...... ***************
+//
 
 /*
  
@@ -30,16 +31,27 @@
  
  */
 
-#import <UIKit/UIKit.h>
+#import "AAPane.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation AAPane
 
-@interface CustomStyleChartVC : UIViewController
-
-@property (nonatomic, assign) NSUInteger chartType;
-@property (nonatomic, assign) NSUInteger selectedIndex;
-@property (nonatomic, strong) NSArray *navigationItemTitleArr;
+AAPropSetFuncImplementation(AAPane, AABackground *, background)
+AAPropSetFuncImplementation(AAPane, NSArray  *, center)
+AAPropSetFuncImplementation(AAPane, NSNumber *, endAngle)
+AAPropSetFuncImplementation(AAPane, NSNumber *, size)
+AAPropSetFuncImplementation(AAPane, NSNumber *, startAngle)
 
 @end
 
-NS_ASSUME_NONNULL_END
+
+@implementation AABackground
+
+AAPropSetFuncImplementation(AABackground, NSString *, backgroundColor)
+AAPropSetFuncImplementation(AABackground, NSString *, borderColor)
+AAPropSetFuncImplementation(AABackground, NSNumber *, borderWidth)
+AAPropSetFuncImplementation(AABackground, NSString *, className)
+AAPropSetFuncImplementation(AABackground, NSNumber *, innerRadius)
+AAPropSetFuncImplementation(AABackground, NSNumber *, outerRadius)
+AAPropSetFuncImplementation(AABackground, NSString *, shape)
+
+@end

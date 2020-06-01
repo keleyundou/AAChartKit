@@ -33,6 +33,7 @@
 #import <Foundation/Foundation.h>
 #import "AASeriesElement.h"
 #import "AAPlotLinesElement.h"
+@class AAScrollablePlotArea;
 
 #define AACHARTKIT_EXTERN     extern __attribute__((visibility ("default")))
 
@@ -75,13 +76,15 @@ typedef NS_ENUM(NSInteger,AAChartAnimation) {
 };
 
 typedef NSString *AAChartType;
-typedef NSString *AAAlignType;
+typedef NSString *AAChartLayoutType;
+typedef NSString *AAChartAlignType;
+typedef NSString *AAChartVerticalAlignType;
 typedef NSString *AAChartZoomType;
 typedef NSString *AAChartStackingType;
 typedef NSString *AAChartSymbolType;
 typedef NSString *AAChartSymbolStyleType;
 typedef NSString *AAChartFontWeightType;
-typedef NSString *AALineDashStyleType;
+typedef NSString *AAChartLineDashStyleType;
 
 AACHARTKIT_EXTERN AAChartType const AAChartTypeColumn;
 AACHARTKIT_EXTERN AAChartType const AAChartTypeBar;
@@ -100,10 +103,19 @@ AACHARTKIT_EXTERN AAChartType const AAChartTypeAreasplinerange;
 AACHARTKIT_EXTERN AAChartType const AAChartTypeBoxplot;
 AACHARTKIT_EXTERN AAChartType const AAChartTypeWaterfall;
 AACHARTKIT_EXTERN AAChartType const AAChartTypePolygon;
+AACHARTKIT_EXTERN AAChartType const AAChartTypeErrorbar;
+AACHARTKIT_EXTERN AAChartType const AAChartTypeGauge;
 
-AACHARTKIT_EXTERN AAAlignType const AAAlignTypeLeft;
-AACHARTKIT_EXTERN AAAlignType const AAAlignTypeCenter;
-AACHARTKIT_EXTERN AAAlignType const AAAlignTypeRight;
+AACHARTKIT_EXTERN AAChartLayoutType const AAChartLayoutTypeHorizontal;
+AACHARTKIT_EXTERN AAChartLayoutType const AAChartLayoutTypeVertical;
+
+AACHARTKIT_EXTERN AAChartAlignType const AAChartAlignTypeLeft;
+AACHARTKIT_EXTERN AAChartAlignType const AAChartAlignTypeCenter;
+AACHARTKIT_EXTERN AAChartAlignType const AAChartAlignTypeRight;
+
+AACHARTKIT_EXTERN AAChartVerticalAlignType const AAChartVerticalAlignTypeTop;
+AACHARTKIT_EXTERN AAChartVerticalAlignType const AAChartVerticalAlignTypeMiddle;
+AACHARTKIT_EXTERN AAChartVerticalAlignType const AAChartVerticalAlignTypeBottom;
 
 AACHARTKIT_EXTERN AAChartZoomType const AAChartZoomTypeNone;
 AACHARTKIT_EXTERN AAChartZoomType const AAChartZoomTypeX;
@@ -128,17 +140,17 @@ AACHARTKIT_EXTERN AAChartFontWeightType const AAChartFontWeightTypeThin;
 AACHARTKIT_EXTERN AAChartFontWeightType const AAChartFontWeightTypeRegular;
 AACHARTKIT_EXTERN AAChartFontWeightType const AAChartFontWeightTypeBold;
 
-AACHARTKIT_EXTERN AALineDashStyleType const AALineDashStyleTypeSolid;
-AACHARTKIT_EXTERN AALineDashStyleType const AALineDashStyleTypeShortDash;
-AACHARTKIT_EXTERN AALineDashStyleType const AALineDashStyleTypeShortDot;
-AACHARTKIT_EXTERN AALineDashStyleType const AALineDashStyleTypeShortDashDot;
-AACHARTKIT_EXTERN AALineDashStyleType const AALineDashStyleTypeShortDashDotDot;
-AACHARTKIT_EXTERN AALineDashStyleType const AALineDashStyleTypeDot;
-AACHARTKIT_EXTERN AALineDashStyleType const AALineDashStyleTypeDash;
-AACHARTKIT_EXTERN AALineDashStyleType const AALineDashStyleTypeLongDash;
-AACHARTKIT_EXTERN AALineDashStyleType const AALineDashStyleTypeDashDot;
-AACHARTKIT_EXTERN AALineDashStyleType const AALineDashStyleTypeLongDashDot;
-AACHARTKIT_EXTERN AALineDashStyleType const AALineDashStyleTypeLongDashDotDot;
+AACHARTKIT_EXTERN AAChartLineDashStyleType const AAChartLineDashStyleTypeSolid;
+AACHARTKIT_EXTERN AAChartLineDashStyleType const AAChartLineDashStyleTypeShortDash;
+AACHARTKIT_EXTERN AAChartLineDashStyleType const AAChartLineDashStyleTypeShortDot;
+AACHARTKIT_EXTERN AAChartLineDashStyleType const AAChartLineDashStyleTypeShortDashDot;
+AACHARTKIT_EXTERN AAChartLineDashStyleType const AAChartLineDashStyleTypeShortDashDotDot;
+AACHARTKIT_EXTERN AAChartLineDashStyleType const AAChartLineDashStyleTypeDot;
+AACHARTKIT_EXTERN AAChartLineDashStyleType const AAChartLineDashStyleTypeDash;
+AACHARTKIT_EXTERN AAChartLineDashStyleType const AAChartLineDashStyleTypeLongDash;
+AACHARTKIT_EXTERN AAChartLineDashStyleType const AAChartLineDashStyleTypeDashDot;
+AACHARTKIT_EXTERN AAChartLineDashStyleType const AAChartLineDashStyleTypeLongDashDot;
+AACHARTKIT_EXTERN AAChartLineDashStyleType const AAChartLineDashStyleTypeLongDashDotDot;
 
 @interface AAChartModel : NSObject
 
@@ -157,7 +169,7 @@ AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSArray     <NSStri
 AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSArray     <NSString *>*, categories) //x轴坐标每个点对应的名称(注意:这个不是用来设置 X 轴的值,仅仅是用于设置 X 轴文字内容的而已)
 AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSArray  *, series) //图表的数据列内容
 
-AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, AAAlignType, subtitleAlign) //图表副标题文本水平对齐方式。可选的值有 “left”，”center“和“right”。 默认是：center.
+AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, AAChartAlignType, subtitleAlign) //图表副标题文本水平对齐方式。可选的值有 “left”，”center“和“right”。 默认是：center.
 AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, AAChartType,              chartType) //图表类型
 AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, AAChartStackingType,      stacking) //堆积样式
 AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, AAChartSymbolType,        markerSymbol) //折线曲线连接点的类型："circle", "square", "diamond", "triangle","triangle-down"，默认是"circle"
@@ -170,10 +182,10 @@ AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, BOOL,       inverte
 AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, BOOL,       easyGradientColors) //是否方便快捷地将常规主题颜色数组 colorsTheme 自动转换为半透明渐变效果的颜色数组(设置后就不用自己再手动去写渐变色字典,相当于是设置渐变色的一个快捷方式,当然了,如果需要细致地自定义渐变色效果,还是需要自己手动配置渐变颜色字典内容,具体方法参见图表示例中的`颜色渐变条形图`示例代码),默认为否
 AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, BOOL,       polar) //是否极化图形(变为雷达图),默认为否
 
-AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, BOOL,       dataLabelEnabled) //是否显示数据,默认为否
-AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, NSString *, dataLabelFontColor) //Datalabel font color
-AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSNumber *, dataLabelFontSize) //Datalabel font size
-AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, NSString *, dataLabelFontWeight) //Datalabel font weight
+AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, BOOL,       dataLabelsEnabled) //是否显示数据,默认为否
+AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, NSString *, dataLabelsFontColor) //Datalabel font color
+AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSNumber *, dataLabelsFontSize) //Datalabel font size
+AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, NSString *, dataLabelsFontWeight) //Datalabel font weight
 
 
 AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, BOOL,       xAxisVisible) //x 轴是否可见(默认可见)
@@ -189,7 +201,7 @@ AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSNumber *, xAxisTi
 
 AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSNumber *, xAxisCrosshairWidth) //设置 x 轴准星线的宽度
 AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, NSString *, xAxisCrosshairColor) //设置 x 轴准星线的颜色
-AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, AALineDashStyleType,   xAxisCrosshairDashStyleType) //设置 x 轴准星线的线条样式类型
+AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, AAChartLineDashStyleType,   xAxisCrosshairDashStyleType) //设置 x 轴准星线的线条样式类型
 
 
 AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, BOOL,       yAxisVisible) //y 轴是否可见(默认可见)
@@ -211,7 +223,7 @@ AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSNumber *, yAxisTi
 AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSArray  *, yAxisTickPositions) //自定义 y 轴坐标（如：[@(0), @(25), @(50), @(75) , (100)]）
 AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSNumber *, yAxisCrosshairWidth) //设置 y 轴准星线的宽度
 AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, NSString *, yAxisCrosshairColor) //设置 y 轴准星线的颜色
-AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, AALineDashStyleType,   yAxisCrosshairDashStyleType) //设置 y 轴准星线的线条样式类型
+AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, AAChartLineDashStyleType,   yAxisCrosshairDashStyleType) //设置 y 轴准星线的线条样式类型
 
 
 AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, BOOL,       tooltipEnabled) //是否显示浮动提示框(默认显示)
@@ -224,5 +236,6 @@ AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSNumber *, borderR
 AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, NSNumber *, markerRadius) //折线连接点的半径长度
 AAPropStatementAndPropSetFuncStatement(copy,   AAChartModel, NSString *, zoomResetButtonText)  //String to display in 'zoom reset button"
 AAPropStatementAndPropSetFuncStatement(assign, AAChartModel, BOOL      , touchEventEnabled)
+AAPropStatementAndPropSetFuncStatement(strong, AAChartModel, AAScrollablePlotArea *, scrollablePlotArea)
 
 @end

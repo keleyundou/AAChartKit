@@ -1,9 +1,9 @@
 //
-//  AAColor.m
+//  DoubleChartsLinkedWorkVC.h
 //  AAChartKitDemo
 //
-//  Created by AnAn on 2018/11/19.
-//  Copyright © 2018 Danny boy. All rights reserved.
+//  Created by AnAn on 2020/1/27.
+//  Copyright © 2020 AnAn. All rights reserved.
 //*************** ...... SOURCE CODE ...... ***************
 //***...................................................***
 //*** https://github.com/AAChartModel/AAChartKit        ***
@@ -30,68 +30,12 @@
  
  */
 
-#import "AAColor.h"
+#import <UIKit/UIKit.h>
 
-@implementation AAColor
+NS_ASSUME_NONNULL_BEGIN
 
-+ (NSString *)blackColor {
-    return @"black";
-};
-
-+ (NSString *)darkGrayColor {
-    return @"darkGray";
-};
-
-+ (NSString *)lightGrayColor {
-    return @"lightGray";
-};
-
-+ (NSString *)whiteColor {
-    return @"white";
-};
-
-+ (NSString *)grayColor {
-    return @"gray";
-};
-
-+ (NSString *)redColor {
-    return @"red";
-};
-
-+ (NSString *)greenColor {
-    return @"green";
-};
-
-+ (NSString *)blueColor {
-    return @"blue";
-};
-
-+ (NSString *)cyanColor {
-    return @"cyan";
-};
-
-+ (NSString *)yellowColor {
-    return @"yellow";
-};
-
-+ (NSString *)magentaColor {
-    return @"magenta";
-};
-
-+ (NSString *)orangeColor {
-    return @"orange";
-};
-
-+ (NSString *)purpleColor {
-    return @"purple";
-};
-
-+ (NSString *)brownColor {
-    return @"brown";
-};
-
-+ (NSString *)clearColor {
-    return @"#00000000";
-};
+@interface DoubleChartsLinkedWorkVC : UIViewController
 
 @end
+
+NS_ASSUME_NONNULL_END
