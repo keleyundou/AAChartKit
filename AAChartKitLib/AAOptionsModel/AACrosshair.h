@@ -37,7 +37,7 @@
 AAPropStatementAndPropSetFuncStatement(copy, AACrosshair, NSString *, dashStyle)  //准星线样式
 AAPropStatementAndPropSetFuncStatement(copy, AACrosshair, NSString *, color)  //准星线颜色
 AAPropStatementAndPropSetFuncStatement(strong, AACrosshair, NSNumber *, width)  //准星线宽度
-
+AAPropStatementAndPropSetFuncStatement(strong, AACrosshair, NSNumber *, zIndex) // 层级
 
 @end
 

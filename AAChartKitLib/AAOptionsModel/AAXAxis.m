@@ -69,5 +69,5 @@ AAPropSetFuncImplementation(AAXAxis, NSNumber *, tickLength)//坐标轴刻度线
 AAPropSetFuncImplementation(AAXAxis, NSString *, tickPosition) //刻度线相对于轴线的位置，可用的值有 inside 和 outside，分别表示在轴线的内部和外部。 默认是：outside.
 AAPropSetFuncImplementation(AAXAxis, NSNumber * , minRange)
 
-
+AAPropSetFuncImplementation(AAXAxis, NSNumber * , zIndex)
 @end
